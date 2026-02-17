@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /form-handler/
+
+Allow: /
+
+Sitemap: https://minuha.sch.id/sitemap.txt
