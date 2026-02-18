@@ -1,429 +1,613 @@
-<?php
-include 'includes/head.php';
-include 'includes/header.php';
+<?php 
+include 'includes/head.php'; 
+include 'includes/header.php'; 
 
-// Konfigurasi dasar
-error_reporting(E_ALL);
-ini_set('display_errors', 1); // Diaktifkan untuk debugging
+require_once __DIR__ . '/../webmaster/includes/db.php'; // Koneksi MySQL
 
-// Buat dan koneksi ke database SQLite
-$database_path = __DIR__ . '/testimonials.db';
+// Ambil data testimonial dari database MySQL
+$testimonials = [];
+$error_message = '';
 
 try {
-    $db = new PDO('sqlite:' . $database_path);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // Buat tabel jika belum ada
-    $db->exec("CREATE TABLE IF NOT EXISTS testimonials (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        role TEXT NOT NULL,
-        message TEXT NOT NULL,
-        avatar TEXT DEFAULT 'default-avatar.jpg',
-        rating INTEGER DEFAULT 5,
-        date_added DATETIME DEFAULT CURRENT_TIMESTAMP
-    )");
-    
-    // Cek apakah tabel kosong, lalu tambahkan data contoh
-    $stmt = $db->query("SELECT COUNT(*) as count FROM testimonials");
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if ($result['count'] == 0) {
-        // Data contoh
-        $sample_data = [
-            ['Ahmad Rizki', 'CEO TechStartup', 'MHTeams membantu perusahaan kami dalam transformasi digital dengan hasil yang luar biasa. Tim mereka profesional dan responsif.', 'ahmad.jpg', 5],
-            ['Sari Dewi', 'Manajer Marketing', 'Layanan MHTeams sangat memuaskan. Projek kami selesai tepat waktu dengan kualitas terbaik yang tidak terduga.', 'sari.jpg', 5],
-            ['Budi Santoso', 'Freelancer Developer', 'Sebagai freelancer, tools dari MHTeams sangat membantu meningkatkan produktivitas saya sehari-hari.', 'budi.jpg', 4],
-            ['Diana Putri', 'Pemilik Bisnis Online', 'Sejak menggunakan jasa MHTeams, penjualan online saya meningkat drastis. Terima kasih atas dukungannya!', 'diana.jpg', 5],
-            ['Rizky Pratama', 'UI/UX Designer', 'Platform MHTeams sangat designer-friendly. Sangat mudah untuk berkolaborasi dengan tim development.', 'rizky.jpg', 4]
-        ];
-        
-        $insert_stmt = $db->prepare("INSERT INTO testimonials (name, role, message, avatar, rating) VALUES (?, ?, ?, ?, ?)");
-        
-        foreach ($sample_data as $data) {
-            $insert_stmt->execute($data);
-        }
+    // Cek apakah tabel testimonials ada
+    $tableCheck = $pdo->query("SHOW TABLES LIKE 'testimonials'");
+    if ($tableCheck->rowCount() == 0) {
+        // Tabel tidak ada, tampilkan pesan error yang lebih friendly
+        $error_message = 'Tabel testimonials belum tersedia. Silakan import file testimonials.sql terlebih dahulu.';
+    } else {
+        // Ambil data testimonial
+        $query = "SELECT id, name, role, message, rating, DATE_FORMAT(date_added, '%d %M %Y') as formatted_date 
+                  FROM testimonials 
+                  ORDER BY date_added DESC";
+        $stmt = $pdo->query($query);
+        $testimonials = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    $database_error = false;
 } catch (PDOException $e) {
-    $database_error = true;
-    error_log("Database error: " . $e->getMessage());
+    $error_message = "Error: " . $e->getMessage();
+    error_log("Error fetching testimonials: " . $e->getMessage());
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonial - MHTeams</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/css/lucide.min.css">
- <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+<!-- Testimonials Section -->
+<section id="mht-testimonials-section" class="mht-testimonials-section">
+    <!-- Background Pattern -->
+    <div class="mht-testimonials-bg-pattern"></div>
+    
+    <div class="mht-testimonials-container">
+        <!-- Section Header -->
+        <div class="mht-testimonials-header-wrapper">
+            <span class="mht-testimonials-badge">TESTIMONIALS</span>
+            <h1 class="mht-testimonials-title">Apa Kata <span>Mereka?</span></h1>
+            <p class="mht-testimonials-subtitle">Cerita nyata dari klien & partner bersama <strong>PT MicroHelix Tech Solutions</strong> yang telah merasakan manfaat layanan kami</p>
+        </div>
 
+        <?php if (!empty($error_message)): ?>
+            <div class="mht-testimonials-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span><?php echo htmlspecialchars($error_message); ?></span>
+            </div>
+        <?php endif; ?>
+
+        <div class="mht-testimonials-grid">
+            <?php if (empty($testimonials) && empty($error_message)): ?>
+                <div class="mht-testimonials-empty">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <span>Belum ada testimoni yang tersedia.</span>
+                </div>
+            <?php else: ?>
+                <?php foreach ($testimonials as $testimonial): 
+                    $name = htmlspecialchars($testimonial['name']);
+                    $role = htmlspecialchars($testimonial['role']);
+                    $message = htmlspecialchars($testimonial['message']);
+                    $rating = (int)$testimonial['rating'];
+                    $date = htmlspecialchars($testimonial['formatted_date']);
+                    
+                    // Format message - jika terlalu panjang, potong dengan rapi
+                    $displayMessage = $message;
+                    if (strlen($message) > 150) {
+                        $lastPeriod = strrpos(substr($message, 0, 150), '.');
+                        if ($lastPeriod !== false) {
+                            $displayMessage = substr($message, 0, $lastPeriod + 1);
+                        } else {
+                            $lastSpace = strrpos(substr($message, 0, 147), ' ');
+                            if ($lastSpace !== false) {
+                                $displayMessage = substr($message, 0, $lastSpace) . '...';
+                            } else {
+                                $displayMessage = substr($message, 0, 147) . '...';
+                            }
+                        }
+                    }
+                    
+                    // Ambil inisial untuk avatar
+                    $initials = '';
+                    $nameParts = explode(' ', $name);
+                    if (count($nameParts) > 0) {
+                        $initials = strtoupper(substr($nameParts[0], 0, 1));
+                        if (count($nameParts) > 1) {
+                            $initials .= strtoupper(substr($nameParts[1], 0, 1));
+                        }
+                    }
+                    
+                    // Batasi inisial maksimal 2 huruf
+                    if (strlen($initials) > 2) {
+                        $initials = substr($initials, 0, 2);
+                    }
+                ?>
+                <div class="mht-testimonials-card">
+                    <div class="mht-testimonials-card-inner">
+                        <!-- Quote Icon -->
+                        <div class="mht-testimonials-quote-icon">
+                            <i class="fa-solid fa-quote-right"></i>
+                        </div>
+                        
+                        <div class="mht-testimonials-header">
+                            <div class="mht-testimonials-avatar-wrapper">
+                                <div class="mht-testimonials-avatar">
+                                    <?php echo $initials ?: 'U'; ?>
+                                </div>
+                            </div>
+                            <div class="mht-testimonials-header-text">
+                                <h3 class="mht-testimonials-name"><?php echo $name; ?></h3>
+                                <p class="mht-testimonials-role"><?php echo $role; ?></p>
+                            </div>
+                        </div>
+
+                        <div class="mht-testimonials-message-wrapper">
+                            <p class="mht-testimonials-message">
+                                "<?php echo $displayMessage; ?>"
+                            </p>
+                        </div>
+
+                        <div class="mht-testimonials-footer">
+                            <div class="mht-testimonials-rating">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <?php if ($i <= $rating): ?>
+                                        <i class="fa-solid fa-star mht-testimonials-star-active"></i>
+                                    <?php else: ?>
+                                        <i class="fa-regular fa-star mht-testimonials-star-inactive"></i>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+                            </div>
+                            <div class="mht-testimonials-date">
+                                <i class="fa-regular fa-calendar"></i>
+                                <span><?php echo $date; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ===== MHT TESTIMONIALS STYLES - NO WHITE SPACE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Reset total */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body { 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+}
+
+/* CSS Variables */
+:root {
+    --mht-testimonials-primary: #9C27B0;
+    --mht-testimonials-primary-dark: #7B1FA2;
+    --mht-testimonials-primary-light: rgba(156, 39, 176, 0.1);
+    --mht-testimonials-accent: #FFD700;
+    --mht-testimonials-text-dark: #121212;
+    --mht-testimonials-text-body: #333333;
+    --mht-testimonials-text-muted: #666666;
+    --mht-testimonials-bg-light: #f8f8fc;
+    --mht-testimonials-bg-white: #ffffff;
+    --mht-testimonials-border: rgba(0, 0, 0, 0.05);
+    --mht-testimonials-shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
+    --mht-testimonials-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
+    --mht-testimonials-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --mht-testimonials-radius: 20px;
+}
+
+/* Main Section */
+.mht-testimonials-section {
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Judul */
-.testimonial-title {
-    text-align: center;
-    font-size: 2.8rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, #9C27B0, #FFD700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 50px 0 20px;
-}
-
-.testimonial-subtitle {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 60px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Grid */
-.testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-/* Card */
-.testimonial-card {
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-    padding: 30px;
+    width: 100%;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
     position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
+    overflow-x: hidden;
+    padding: 30px 0 80px 0;
+    margin: 0;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.15);
-}
-
-.testimonial-card::before {
-    content: '';
+/* Background Pattern */
+.mht-testimonials-bg-pattern {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 5px;
-    background: linear-gradient(45deg, #9C27B0, #FFD700);
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
+    bottom: 0;
+    background: radial-gradient(circle at 10% 20%, rgba(156, 39, 176, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(156, 39, 176, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Container */
+.mht-testimonials-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header Section */
+.mht-testimonials-header-wrapper {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.mht-testimonials-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--mht-testimonials-primary-light), rgba(156, 39, 176, 0.05));
+    color: var(--mht-testimonials-primary);
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    text-transform: uppercase;
+    backdrop-filter: blur(5px);
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-testimonials-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--mht-testimonials-text-dark);
+    margin-bottom: 12px;
+    line-height: 1.2;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-testimonials-title span {
+    background: linear-gradient(135deg, var(--mht-testimonials-primary), var(--mht-testimonials-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-testimonials-subtitle {
+    font-size: 1rem;
+    color: var(--mht-testimonials-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-testimonials-subtitle strong {
+    color: var(--mht-testimonials-primary);
+    font-weight: 600;
+}
+
+/* Testimonials Grid */
+.mht-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+/* Testimonial Card */
+.mht-testimonials-card {
+    background: var(--mht-testimonials-bg-white);
+    border-radius: var(--mht-testimonials-radius);
+    overflow: hidden;
+    box-shadow: var(--mht-testimonials-shadow-sm);
+    transition: var(--mht-testimonials-transition);
+    border: 1px solid var(--mht-testimonials-border);
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.mht-testimonials-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--mht-testimonials-primary), var(--mht-testimonials-primary-dark));
+    transition: height 0.3s ease;
+    z-index: 2;
+}
+
+.mht-testimonials-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--mht-testimonials-shadow-hover);
+}
+
+.mht-testimonials-card:hover::before {
+    height: 100%;
+}
+
+.mht-testimonials-card-inner {
+    padding: 25px 20px 20px;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Quote Icon */
+.mht-testimonials-quote-icon {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 3rem;
+    color: var(--mht-testimonials-primary);
+    opacity: 0.1;
+    transition: var(--mht-testimonials-transition);
+}
+
+.mht-testimonials-card:hover .mht-testimonials-quote-icon {
+    opacity: 0.2;
+    transform: scale(1.1);
 }
 
 /* Header */
-.testimonial-header {
+.mht-testimonials-header {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 15px;
     margin-bottom: 18px;
+    position: relative;
+    z-index: 3;
 }
 
-.testimonial-avatar {
-    width: 65px;
-    height: 65px;
+.mht-testimonials-avatar-wrapper {
+    flex-shrink: 0;
+}
+
+.mht-testimonials-avatar {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #9C27B0, #FFD700);
+    background: linear-gradient(135deg, var(--mht-testimonials-primary), var(--mht-testimonials-primary-dark));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.6rem;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover .testimonial-avatar {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.testimonial-header-text h3 {
-    margin: 0;
-    font-size: 1.3rem;
+    color: white;
     font-weight: 600;
-    color: #333;
+    font-size: 1.4rem;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(156, 39, 176, 0.2);
+    transition: var(--mht-testimonials-transition);
 }
 
-.testimonial-header-text small {
-    color: #888;
-    font-size: 0.9rem;
-    display: block;
+.mht-testimonials-card:hover .mht-testimonials-avatar {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.3);
+}
+
+.mht-testimonials-header-text {
+    flex: 1;
+}
+
+.mht-testimonials-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--mht-testimonials-text-dark);
+    margin-bottom: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-testimonials-role {
+    font-size: 0.85rem;
+    color: var(--mht-testimonials-text-muted);
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Message */
-.testimonial-message {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.7;
-    margin-bottom: 22px;
-    font-style: italic;
-    position: relative;
+.mht-testimonials-message-wrapper {
+    flex: 1;
+    margin-bottom: 20px;
 }
 
-.testimonial-message::before {
-    content: "“";
-    position: absolute;
-    top: -10px;
-    left: -5px;
-    font-size: 3rem;
-    color: #9C27B0;
-    opacity: 0.2;
+.mht-testimonials-message {
+    font-size: 0.95rem;
+    color: var(--mht-testimonials-text-body);
+    line-height: 1.7;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Footer */
-.testimonial-footer {
+.mht-testimonials-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
+    padding-top: 15px;
+    border-top: 1px solid var(--mht-testimonials-border);
 }
 
-.stars {
+.mht-testimonials-rating {
     display: flex;
     gap: 3px;
 }
 
-.star {
-    color: #FFD700;
-    font-size: 1rem;
+.mht-testimonials-star-active {
+    color: var(--mht-testimonials-accent);
+    font-size: 0.9rem;
 }
 
-.star-off {
+.mht-testimonials-star-inactive {
     color: #ddd;
+    font-size: 0.9rem;
 }
 
-.date {
+.mht-testimonials-date {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #9C27B0;
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: var(--mht-testimonials-primary);
+    font-size: 0.8rem;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* No data & Error states */
-.no-data-container,
-.error-container {
+.mht-testimonials-date i {
+    font-size: 0.8rem;
+}
+
+/* Empty State */
+.mht-testimonials-empty {
     grid-column: 1 / -1;
     text-align: center;
     padding: 60px 20px;
+    background: var(--mht-testimonials-bg-white);
+    border-radius: var(--mht-testimonials-radius);
+    color: var(--mht-testimonials-text-muted);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border: 2px dashed rgba(156, 39, 176, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-.no-data,
-.error-message {
-    font-size: 1.1rem;
-    color: #666;
-    background: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-    max-width: 500px;
-    margin: 0 auto;
+.mht-testimonials-empty i {
+    font-size: 3rem;
+    color: var(--mht-testimonials-primary);
+    opacity: 0.5;
 }
 
-.error-message {
-    color: #e74c3c;
-    border-left: 4px solid #e74c3c;
+/* Error State */
+.mht-testimonials-error {
+    grid-column: 1 / -1;
+    background: #FEE2E2;
+    color: #B91C1C;
+    padding: 16px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    border-left: 4px solid #B91C1C;
+    margin-bottom: 30px;
 }
 
-/* Responsive */
+.mht-testimonials-error i {
+    font-size: 1.3rem;
+    color: #B91C1C;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+    .mht-testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
 @media (max-width: 768px) {
-    .testimonial-title {
-        font-size: 2.2rem;
+    .mht-testimonials-section {
+        padding: 20px 0 60px 0;
     }
     
-    .testimonial-subtitle {
-        font-size: 1rem;
+    .mht-testimonials-container {
+        padding: 0 15px;
     }
     
-    .testimonial-card {
-        padding: 22px;
+    .mht-testimonials-header-wrapper {
+        margin-bottom: 30px;
     }
     
-    .testimonial-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+    .mht-testimonials-badge {
+        margin-bottom: 10px;
+        padding: 5px 16px;
+        font-size: 0.75rem;
     }
-}
-
-@media (max-width: 480px) {
-    .testimonial-title {
+    
+    .mht-testimonials-title {
         font-size: 1.8rem;
     }
     
-    .testimonial-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+    .mht-testimonials-subtitle {
+        font-size: 0.95rem;
     }
     
-    .testimonial-avatar {
-        width: 55px;
-        height: 55px;
-        font-size: 1.3rem;
+    .mht-testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin: 0 auto;
     }
+    
+    .mht-testimonials-card-inner {
+        padding: 20px 18px 18px;
+    }
+    
+    .mht-testimonials-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .mht-testimonials-section {
+        padding: 15px 0 50px 0;
+    }
+    
+    .mht-testimonials-title {
+        font-size: 1.5rem;
+    }
+    
+    .mht-testimonials-badge {
+        font-size: 0.7rem;
+        padding: 4px 14px;
+    }
+    
+    .mht-testimonials-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .mht-testimonials-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .mht-testimonials-message {
+        text-align: center;
+    }
+}
+
+/* Animation */
+.mht-testimonials-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtTestimonialsSlideIn 0.5s ease forwards;
+}
+
+.mht-testimonials-card:nth-child(1) { animation-delay: 0.1s; }
+.mht-testimonials-card:nth-child(2) { animation-delay: 0.15s; }
+.mht-testimonials-card:nth-child(3) { animation-delay: 0.2s; }
+.mht-testimonials-card:nth-child(4) { animation-delay: 0.25s; }
+.mht-testimonials-card:nth-child(5) { animation-delay: 0.3s; }
+.mht-testimonials-card:nth-child(6) { animation-delay: 0.35s; }
+.mht-testimonials-card:nth-child(7) { animation-delay: 0.4s; }
+.mht-testimonials-card:nth-child(8) { animation-delay: 0.45s; }
+.mht-testimonials-card:nth-child(9) { animation-delay: 0.5s; }
+.mht-testimonials-card:nth-child(10) { animation-delay: 0.55s; }
+
+@keyframes mhtTestimonialsSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effect */
+.mht-testimonials-card:hover .mht-testimonials-name {
+    color: var(--mht-testimonials-primary);
+    transition: var(--mht-testimonials-transition);
+}
+
+.mht-testimonials-card:hover .mht-testimonials-star-active {
+    animation: mhtTestimonialsStarPulse 0.5s ease;
+}
+
+@keyframes mhtTestimonialsStarPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 </style>
 
-</head>
-<body>
-
-<div class="container">
-    <h1 class="testimonial-title">Apa Kata Mereka?</h1>
-    <p class="testimonial-subtitle">Cerita nyata dari klien & partner bersama <b>MHTeams</b>.</p>
-
-    <div class="testimonial-grid">
-        <?php
-        if (!$database_error):
-            try {
-                // Query untuk mendapatkan testimonial
-                $stmt = $db->query("SELECT id, name, role, message, avatar, rating, date_added FROM testimonials ORDER BY date_added DESC");
-                $testimonials = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                if (count($testimonials) > 0):
-                    foreach ($testimonials as $row):
-                        // Sanitasi dan validasi data
-                        $name = !empty($row['name']) ? htmlspecialchars(trim($row['name']), ENT_QUOTES, 'UTF-8') : 'Anonymous';
-                        $role = !empty($row['role']) ? htmlspecialchars(trim($row['role']), ENT_QUOTES, 'UTF-8') : 'Client';
-                        $message = !empty($row['message']) ? nl2br(htmlspecialchars(trim($row['message']), ENT_QUOTES, 'UTF-8')) : 'No message provided';
-                        $rating = isset($row['rating']) && is_numeric($row['rating']) ? max(1, min(5, intval($row['rating']))) : 5;
-                        $date_added = !empty($row['date_added']) ? $row['date_added'] : date('Y-m-d H:i:s');
-                        
-                        // Ambil inisial untuk avatar
-                        $initials = '';
-                        $nameParts = explode(' ', $name);
-                        if (count($nameParts) > 0) {
-                            $initials = strtoupper(substr($nameParts[0], 0, 1));
-                            if (count($nameParts) > 1) {
-                                $initials .= strtoupper(substr($nameParts[1], 0, 1));
-                            }
-                        }
-        ?>
-
-    <div class="testimonial-card">
-        <div class="testimonial-header">
-            <div class="testimonial-avatar">
-                <?php echo $initials; ?>
-            </div>
-            <div class="testimonial-header-text">
-                <h3><?php echo $name; ?></h3>
-                <small><?php echo $role; ?></small>
-            </div>
-        </div>
-
-        <p class="testimonial-message">
-            "<?php echo $message; ?>"
-        </p>
-
-        <div class="testimonial-footer">
-            <div class="stars">
-                <?php for ($i = 1; $i <= 5; $i++): ?>
-                    <?php if ($i <= $rating): ?>
-                        <i class="fa-solid fa-star" style="color:#FFD700;"></i>
-                    <?php else: ?>
-                        <i class="fa-regular fa-star" style="color:#ddd;"></i>
-                    <?php endif; ?>
-                <?php endfor; ?>
-            </div>
-            <div class="date">
-                <i class="fa-regular fa-calendar" style="color:#9C27B0;"></i>
-                <span>
-                    <?php 
-                        try {
-                            echo date("d M Y", strtotime($date_added));
-                        } catch (Exception $e) {
-                            echo date("d M Y");
-                        }
-                    ?>
-                </span>
-            </div>
-        </div>
-    </div>
-
-        <?php 
-                    endforeach; 
-                else: 
-        ?>
-            <div class="no-data-container">
-                <p class="no-data">Belum ada testimoni yang tersedia.</p>
-            </div>
-        <?php 
-                endif;
-            } catch (Exception $e) {
-                error_log("Database query error: " . $e->getMessage());
-        ?>
-            <div class="error-container">
-                <p class="error-message">Terjadi kesalahan saat memuat testimoni. Silakan coba lagi nanti.</p>
-            </div>
-        <?php
-            }
-        else:
-        ?>
-            <div class="error-container">
-                <p class="error-message">Tidak dapat terhubung ke database. Silakan coba lagi nanti.</p>
-            </div>
-        <?php endif; ?>
-    </div>
-</div>
-
 <?php include 'includes/footer.php'; ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Animasi untuk card
-    const cards = document.querySelectorAll('.testimonial-card');
-    cards.forEach(function(card, index) {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
-        setTimeout(function() {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 100 * index);
-    });
-});
-
-// Global error handler
-window.addEventListener('error', function(e) {
-    console.error('JavaScript Error:', e.error);
-});
-</script>
-
-</body>
-
-</html>
