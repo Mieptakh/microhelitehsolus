@@ -332,8 +332,26 @@ include __DIR__ . '/../webmaster/includes/db.php';
 <style>
 /* ===== MHT FAQ STYLES - POPPINS ALL & ADJUSTED SPACING ===== */
 /* Import Font Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* CSS Variables - Konsisten dengan halaman home */
+:root {
+    --mht-faq-primary: #9C27B0;
+    --mht-faq-primary-dark: #7B1FA2;
+    --mht-faq-primary-light: rgba(156, 39, 176, 0.1);
+    --mht-faq-text-dark: #121212;
+    --mht-faq-text-body: #333333;
+    --mht-faq-text-muted: #666666;
+    --mht-faq-bg-light: #f8f8fc;
+    --mht-faq-bg-white: #ffffff;
+    --mht-faq-border: rgba(0, 0, 0, 0.05);
+    --mht-faq-shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
+    --mht-faq-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.12);
+    --mht-faq-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --mht-faq-radius: 16px;
+    --bg-light: #F9F9F9; /* Tambahan dari home */
+}
 
 /* Reset total */
 * {
@@ -349,23 +367,32 @@ html, body {
     overflow-x: hidden;
     background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
     font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* CSS Variables */
-:root {
-    --mht-faq-primary: #9C27B0;
-    --mht-faq-primary-dark: #7B1FA2;
-    --mht-faq-primary-light: rgba(156, 39, 176, 0.1);
-    --mht-faq-text-dark: #121212;
-    --mht-faq-text-body: #333333;
-    --mht-faq-text-muted: #666666;
-    --mht-faq-bg-light: #f8f8fc;
-    --mht-faq-bg-white: #ffffff;
-    --mht-faq-border: rgba(0, 0, 0, 0.05);
-    --mht-faq-shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
-    --mht-faq-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.12);
-    --mht-faq-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --mht-faq-radius: 16px;
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HOME ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-faq-primary), var(--mht-faq-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-faq-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-faq-primary) var(--bg-light);
 }
 
 /* Main Section */
@@ -379,7 +406,7 @@ html, body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 30px 0 60px 0; /* Reduced top padding from 100px to 30px */
+    padding: 30px 0 60px 0;
     margin: 0;
 }
 
@@ -406,22 +433,22 @@ html, body {
     z-index: 2;
 }
 
-/* Header Section - Adjusted spacing */
+/* Header Section */
 .mht-faq-header-wrapper {
     text-align: center;
-    margin-bottom: 40px; /* Reduced from 50px */
+    margin-bottom: 40px;
 }
 
 .mht-faq-badge {
     display: inline-block;
     background: linear-gradient(135deg, var(--mht-faq-primary-light), rgba(156, 39, 176, 0.05));
     color: var(--mht-faq-primary);
-    padding: 6px 20px; /* Reduced padding */
+    padding: 6px 20px;
     border-radius: 50px;
-    font-size: 0.8rem; /* Slightly smaller */
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 1.5px;
-    margin-bottom: 15px; /* Reduced from 20px */
+    margin-bottom: 15px;
     border: 1px solid rgba(156, 39, 176, 0.2);
     text-transform: uppercase;
     backdrop-filter: blur(5px);
@@ -432,7 +459,7 @@ html, body {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     color: var(--mht-faq-text-dark);
-    margin-bottom: 12px; /* Reduced from 15px */
+    margin-bottom: 12px;
     line-height: 1.2;
     font-family: 'Poppins', sans-serif;
 }
@@ -479,6 +506,12 @@ html, body {
     border: 1px solid var(--mht-faq-border);
     width: 100%;
     position: relative;
+}
+
+.mht-faq-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mht-faq-shadow-hover);
+    border-color: var(--mht-faq-primary-light);
 }
 
 .mht-faq-card:last-child {
@@ -649,6 +682,11 @@ html, body {
     transition: var(--mht-faq-transition);
 }
 
+.mht-faq-service-block:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mht-faq-shadow-sm);
+}
+
 .mht-faq-service-icon {
     width: 40px;
     height: 40px;
@@ -715,6 +753,10 @@ html, body {
     transition: var(--mht-faq-transition);
 }
 
+.mht-faq-advantage-block:hover {
+    background: var(--mht-faq-primary-light);
+}
+
 .mht-faq-advantage-block i {
     color: var(--mht-faq-primary);
     font-size: 1.1rem;
@@ -771,6 +813,12 @@ html, body {
     margin-top: 15px;
     font-size: 0.95rem;
     font-family: 'Poppins', sans-serif;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.9; }
 }
 
 .mht-faq-highlight-card i {
@@ -847,6 +895,11 @@ html, body {
     font-size: 0.9rem;
 }
 
+.mht-faq-maintenance-block:hover {
+    background: var(--mht-faq-primary-light);
+    transform: translateX(5px);
+}
+
 .mht-faq-maintenance-block i {
     color: var(--mht-faq-primary);
     font-size: 1rem;
@@ -884,6 +937,13 @@ html, body {
     border: 1px solid transparent;
 }
 
+.mht-faq-contact-block:hover {
+    transform: translateY(-5px);
+    background: white;
+    border-color: var(--mht-faq-primary-light);
+    box-shadow: var(--mht-faq-shadow-sm);
+}
+
 .mht-faq-contact-block i {
     color: var(--mht-faq-primary);
     font-size: 1.5rem;
@@ -907,6 +967,10 @@ html, body {
     line-height: 1.4;
     word-break: break-word;
     font-family: 'Poppins', sans-serif;
+}
+
+.mht-faq-contact-block a:hover {
+    color: var(--mht-faq-primary);
 }
 
 /* Response Note */
@@ -942,7 +1006,7 @@ html, body {
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 768px) {
     .mht-faq-section {
-        padding: 20px 0 50px 0; /* Even smaller top padding on mobile */
+        padding: 20px 0 50px 0;
     }
     
     .mht-faq-container {
@@ -983,6 +1047,7 @@ html, body {
     
     .mht-faq-contact-wrapper {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 }
 
@@ -999,7 +1064,36 @@ html, body {
         font-size: 0.7rem;
         padding: 4px 14px;
     }
+    
+    .mht-faq-contact-wrapper {
+        grid-template-columns: 1fr;
+    }
 }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mht-faq-card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.mht-faq-card:nth-child(1) { animation-delay: 0.1s; }
+.mht-faq-card:nth-child(2) { animation-delay: 0.2s; }
+.mht-faq-card:nth-child(3) { animation-delay: 0.3s; }
+.mht-faq-card:nth-child(4) { animation-delay: 0.4s; }
+.mht-faq-card:nth-child(5) { animation-delay: 0.5s; }
+.mht-faq-card:nth-child(6) { animation-delay: 0.6s; }
+.mht-faq-card:nth-child(7) { animation-delay: 0.7s; }
+.mht-faq-card:nth-child(8) { animation-delay: 0.8s; }
 </style>
 
 <script>
@@ -1043,6 +1137,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Optional: Buka FAQ pertama secara otomatis
+    // setTimeout(() => {
+    //     const firstQuestion = document.querySelector('.mht-faq-question');
+    //     if (firstQuestion) {
+    //         firstQuestion.click();
+    //     }
+    // }, 500);
 });
 </script>
 

@@ -19,6 +19,8 @@ $routes = [
     'kontak' => 'pages/kontak.php',
     'testimoni' => 'pages/testimoni.php',
     'frequently-asked-question' => 'pages/frequently-asked-question.php',
+    'berita' => 'pages/berita.php',
+    'detail-berita' => 'pages/detail-berita.php',
 ];
 
 // ==========================

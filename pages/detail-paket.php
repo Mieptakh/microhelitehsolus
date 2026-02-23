@@ -33,6 +33,10 @@ try {
 }
 ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <!-- Package Detail Section -->
 <section id="mht-package-detail" class="mht-package-detail-section">
     <!-- Background Pattern -->
@@ -41,7 +45,7 @@ try {
     <div class="mht-package-detail-container">
         <!-- Back Button -->
         <a href="paket-kami.php" class="mht-package-detail-back">
-            <i class="fa-regular fa-arrow-left"></i>
+            <i class="fas fa-arrow-left"></i>
             <span>Kembali ke Semua Paket</span>
         </a>
 
@@ -72,7 +76,7 @@ try {
                 <!-- Features -->
                 <div class="mht-package-detail-features">
                     <h2 class="mht-package-detail-subtitle">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fas fa-list-check"></i>
                         Fitur yang Didapatkan
                     </h2>
                     <ul class="mht-package-detail-features-list">
@@ -83,7 +87,7 @@ try {
                             if (!empty($feature)):
                         ?>
                             <li>
-                                <i class="fa-solid fa-circle-check mht-package-detail-feature-icon"></i>
+                                <i class="fas fa-circle-check mht-package-detail-feature-icon"></i>
                                 <span><?php echo htmlspecialchars($feature); ?></span>
                             </li>
                         <?php 
@@ -99,7 +103,7 @@ try {
                 ?>
                 <div class="mht-package-detail-gallery">
                     <h2 class="mht-package-detail-subtitle">
-                        <i class="fa-solid fa-images"></i>
+                        <i class="fas fa-images"></i>
                         Contoh Tampilan
                     </h2>
                     <div class="mht-package-detail-gallery-grid">
@@ -112,7 +116,7 @@ try {
                                      alt="Screenshot <?php echo htmlspecialchars($package['name']); ?>"
                                      loading="lazy">
                                 <div class="mht-package-detail-gallery-overlay">
-                                    <i class="fa-regular fa-magnifying-glass-plus"></i>
+                                    <i class="fas fa-search-plus"></i>
                                 </div>
                             </div>
                         <?php 
@@ -130,9 +134,9 @@ try {
                            class="mht-package-detail-btn-preview" 
                            target="_blank" 
                            rel="noopener noreferrer">
-                            <i class="fa-regular fa-eye"></i>
+                            <i class="far fa-eye"></i>
                             <span>Live Preview</span>
-                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <i class="fas fa-external-link-alt"></i>
                         </a>
                     <?php endif; ?>
                     
@@ -140,7 +144,7 @@ try {
                        class="mht-package-detail-btn-wa" 
                        target="_blank" 
                        rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp"></i>
+                        <i class="fab fa-whatsapp"></i>
                         <span>Hubungi via WhatsApp</span>
                     </a>
                 </div>
@@ -150,7 +154,7 @@ try {
             <div class="mht-package-detail-sidebar">
                 <div class="mht-package-detail-payment">
                     <h3 class="mht-package-detail-payment-title">
-                        <i class="fa-regular fa-credit-card"></i>
+                        <i class="far fa-credit-card"></i>
                         Metode Pembayaran
                     </h3>
                     
@@ -158,7 +162,7 @@ try {
                         <!-- Bank Transfer -->
                         <div class="mht-package-detail-payment-group">
                             <h4 class="mht-package-detail-payment-group-title">
-                                <i class="fa-regular fa-building-column"></i>
+                                <i class="fas fa-university"></i>
                                 Bank Transfer
                             </h4>
                             <div class="mht-package-detail-payment-items">
@@ -186,7 +190,7 @@ try {
                         <!-- E-Wallet -->
                         <div class="mht-package-detail-payment-group">
                             <h4 class="mht-package-detail-payment-group-title">
-                                <i class="fa-regular fa-mobile"></i>
+                                <i class="fas fa-mobile-alt"></i>
                                 E-Wallet
                             </h4>
                             <div class="mht-package-detail-payment-items">
@@ -220,16 +224,16 @@ try {
                         <!-- Pembayaran Lainnya -->
                         <div class="mht-package-detail-payment-group">
                             <h4 class="mht-package-detail-payment-group-title">
-                                <i class="fa-regular fa-qrcode"></i>
+                                <i class="fas fa-qrcode"></i>
                                 Pembayaran Lainnya
                             </h4>
                             <div class="mht-package-detail-payment-items">
                                 <div class="mht-package-detail-payment-item">
-                                    <i class="fa-regular fa-qrcode"></i>
+                                    <i class="fas fa-qrcode"></i>
                                     <span>QRIS</span>
                                 </div>
                                 <div class="mht-package-detail-payment-item">
-                                    <i class="fa-regular fa-money-bill"></i>
+                                    <i class="fas fa-money-bill"></i>
                                     <span>Cash (Offline)</span>
                                 </div>
                             </div>
@@ -237,12 +241,12 @@ try {
                     </div>
 
                     <div class="mht-package-detail-payment-note">
-                        <i class="fa-regular fa-circle-info"></i>
+                        <i class="fas fa-info-circle"></i>
                         <p>Detail nomor rekening atau e-wallet akan diberikan setelah Anda menghubungi kami melalui WhatsApp. Kami akan membalas dengan informasi pembayaran lengkap.</p>
                     </div>
 
                     <div class="mht-package-detail-payment-security">
-                        <i class="fa-regular fa-shield-check"></i>
+                        <i class="fas fa-shield-alt"></i>
                         <span>Pembayaran 100% Aman & Terpercaya</span>
                     </div>
                 </div>
@@ -250,14 +254,14 @@ try {
                 <!-- Contact Info -->
                 <div class="mht-package-detail-contact">
                     <h3 class="mht-package-detail-contact-title">
-                        <i class="fa-regular fa-headset"></i>
+                        <i class="fas fa-headset"></i>
                         Butuh Bantuan?
                     </h3>
                     <p class="mht-package-detail-contact-text">
                         Tim kami siap membantu Anda memilih paket yang tepat dan menjawab pertanyaan seputar pembayaran.
                     </p>
                     <a href="https://wa.me/6285183241229" class="mht-package-detail-contact-btn" target="_blank">
-                        <i class="fa-brands fa-whatsapp"></i>
+                        <i class="fab fa-whatsapp"></i>
                         <span>Chat via WhatsApp</span>
                     </a>
                 </div>
@@ -267,25 +271,8 @@ try {
 </section>
 
 <style>
-/* ===== MHT PACKAGE DETAIL STYLES - NO WHITE SPACE ===== */
+/* ===== MHT PACKAGE DETAIL STYLES - WITH CUSTOM SCROLLBAR ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-/* Reset total */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
-    font-family: 'Poppins', sans-serif;
-}
 
 /* CSS Variables */
 :root {
@@ -302,6 +289,51 @@ html, body {
     --mht-package-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-package-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-package-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan halaman lain */
+}
+
+/* Reset total */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-package-primary), var(--mht-package-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+    transition: var(--mht-package-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-package-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-package-primary) var(--bg-light);
 }
 
 /* Main Section */
@@ -378,6 +410,9 @@ html, body {
     border: 1px solid var(--mht-package-border);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtPackageDetailSlideIn 0.5s ease 0.1s forwards;
 }
 
 .mht-package-detail-main::before {
@@ -638,6 +673,9 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtPackageDetailSlideIn 0.5s ease 0.2s forwards;
 }
 
 /* Payment Methods */
@@ -798,7 +836,15 @@ html, body {
     transform: translateY(-3px);
 }
 
-/* Responsive */
+/* Animations */
+@keyframes mhtPackageDetailSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .mht-package-detail-wrapper {
         grid-template-columns: 1fr;
@@ -806,6 +852,10 @@ html, body {
 }
 
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
     .mht-package-detail-section {
         padding: 20px 0 60px 0;
     }
@@ -862,28 +912,60 @@ html, body {
     }
 }
 
-/* Animation */
-.mht-package-detail-main,
-.mht-package-detail-sidebar {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: mhtPackageDetailSlideIn 0.5s ease forwards;
-}
-
-.mht-package-detail-main {
-    animation-delay: 0.1s;
-}
-
-.mht-package-detail-sidebar {
-    animation-delay: 0.2s;
-}
-
-@keyframes mhtPackageDetailSlideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
 }
 </style>
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

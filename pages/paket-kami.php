@@ -32,14 +32,14 @@ try {
 
         <?php if (!empty($error_message)): ?>
             <div class="mht-packages-error">
-                <i class="fa-solid fa-circle-exclamation"></i>
+                <i class="fas fa-exclamation-circle"></i>
                 <span><?php echo $error_message; ?></span>
             </div>
         <?php endif; ?>
 
         <?php if (empty($packages) && empty($error_message)): ?>
             <div class="mht-packages-empty">
-                <i class="fa-regular fa-box-open"></i>
+                <i class="far fa-box-open"></i>
                 <span>Belum ada paket yang tersedia saat ini.</span>
             </div>
         <?php else: ?>
@@ -56,7 +56,7 @@ try {
                 <div class="mht-packages-card <?php echo $isPopular ? 'mht-packages-card-popular' : ''; ?>">
                     <?php if ($isPopular): ?>
                         <div class="mht-packages-popular-badge">
-                            <i class="fa-solid fa-crown"></i>
+                            <i class="fas fa-crown"></i>
                             <span>Paling Populer</span>
                         </div>
                     <?php endif; ?>
@@ -78,7 +78,7 @@ try {
                                     if (!empty($feature)):
                                 ?>
                                     <li>
-                                        <i class="fa-solid fa-check mht-packages-feature-icon"></i>
+                                        <i class="fas fa-check mht-packages-feature-icon"></i>
                                         <span><?php echo htmlspecialchars($feature); ?></span>
                                     </li>
                                 <?php 
@@ -90,9 +90,9 @@ try {
 
                         <div class="mht-packages-actions">
                             <a href="detail-paket?slug=<?php echo urlencode($slug); ?>" class="mht-packages-btn-detail">
-                                <i class="fa-regular fa-eye"></i>
+                                <i class="far fa-eye"></i>
                                 <span>Lihat Detail</span>
-                                <i class="fa-regular fa-arrow-right-long mht-packages-btn-icon"></i>
+                                <i class="fas fa-arrow-right mht-packages-btn-icon"></i>
                             </a>
                         </div>
                     </div>
@@ -104,25 +104,9 @@ try {
 </section>
 
 <style>
-/* ===== MHT PACKAGES STYLES - NO WHITE SPACE & CONSISTENT WITH OTHER PAGES ===== */
+/* ===== MHT PACKAGES STYLES - WITH CUSTOM SCROLLBAR ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-/* Reset total */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
-    font-family: 'Poppins', sans-serif;
-}
+@import url('https://use.fontawesome.com/releases/v6.0.0/css/all.css');
 
 /* CSS Variables - Konsisten dengan halaman lain */
 :root {
@@ -139,6 +123,49 @@ html, body {
     --mht-packages-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-packages-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-packages-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan home page */
+}
+
+/* Reset total */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HOME DAN FAQ ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-packages-primary), var(--mht-packages-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-packages-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-packages-primary) var(--bg-light);
 }
 
 /* Main Section */
@@ -244,6 +271,9 @@ html, body {
     position: relative;
     height: 100%;
     width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtPackagesSlideIn 0.5s ease forwards;
 }
 
 .mht-packages-card::before {
@@ -321,6 +351,11 @@ html, body {
     color: var(--mht-packages-text-dark);
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
+    transition: var(--mht-packages-transition);
+}
+
+.mht-packages-card:hover .mht-packages-name {
+    color: var(--mht-packages-primary);
 }
 
 .mht-packages-price-wrapper {
@@ -481,6 +516,37 @@ html, body {
     color: #B91C1C;
 }
 
+/* Animations */
+@keyframes mhtPackagesSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation */
+.mht-packages-card:nth-child(1) { animation-delay: 0.1s; }
+.mht-packages-card:nth-child(2) { animation-delay: 0.15s; }
+.mht-packages-card:nth-child(3) { animation-delay: 0.2s; }
+.mht-packages-card:nth-child(4) { animation-delay: 0.25s; }
+.mht-packages-card:nth-child(5) { animation-delay: 0.3s; }
+.mht-packages-card:nth-child(6) { animation-delay: 0.35s; }
+
+/* Pulse Animation untuk Popular Badge */
+@keyframes mhtPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.mht-packages-card-popular .mht-packages-popular-badge {
+    animation: mhtPulse 2s infinite;
+}
+
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 992px) {
     .mht-packages-grid {
@@ -541,6 +607,11 @@ html, body {
     .mht-packages-card-popular:hover {
         transform: translateY(-8px);
     }
+    
+    /* Scrollbar tetap sama di mobile */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -565,32 +636,76 @@ html, body {
     }
 }
 
-/* Animation */
-.mht-packages-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: mhtPackagesSlideIn 0.5s ease forwards;
+/* Hover effect tambahan */
+.mht-packages-card:hover .mht-packages-feature-icon {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
 }
 
-.mht-packages-card:nth-child(1) { animation-delay: 0.1s; }
-.mht-packages-card:nth-child(2) { animation-delay: 0.15s; }
-.mht-packages-card:nth-child(3) { animation-delay: 0.2s; }
-.mht-packages-card:nth-child(4) { animation-delay: 0.25s; }
-.mht-packages-card:nth-child(5) { animation-delay: 0.3s; }
-.mht-packages-card:nth-child(6) { animation-delay: 0.35s; }
-
-@keyframes mhtPackagesSlideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
 }
 
-/* Hover effect */
-.mht-packages-card:hover .mht-packages-name {
-    color: var(--mht-packages-primary);
-    transition: var(--mht-packages-transition);
+/* Fallback jika Font Awesome lambat load */
+.fa, .fas, .far, .fab, .fal, .fad {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif;
 }
 </style>
+
+<!-- Font Awesome dengan fallback CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Backup CDN -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
+<script>
+// Optional: Tambahkan smooth scroll untuk anchor links
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback font display -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

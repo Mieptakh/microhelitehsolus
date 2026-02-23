@@ -2,10 +2,31 @@
 <?php include 'includes/header.php'; ?>
 <?php include __DIR__ . '/../webmaster/includes/db.php'; ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <style>
-/* ===== MHT ABOUT STYLES - FULLY CUSTOMIZED & NO WHITE SPACE ===== */
+/* ===== MHT ABOUT STYLES - WITH CUSTOM SCROLLBAR ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* CSS Variables - Konsisten dengan halaman lain */
+:root {
+    --mht-about-primary: #9C27B0;
+    --mht-about-primary-dark: #7B1FA2;
+    --mht-about-primary-light: rgba(156, 39, 176, 0.1);
+    --mht-about-text-dark: #121212;
+    --mht-about-text-body: #333333;
+    --mht-about-text-muted: #666666;
+    --mht-about-bg-light: #f8f8fc;
+    --mht-about-bg-white: #ffffff;
+    --mht-about-border: rgba(0, 0, 0, 0.05);
+    --mht-about-shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
+    --mht-about-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
+    --mht-about-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --mht-about-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan home page */
+}
 
 /* Reset total */
 * {
@@ -24,21 +45,31 @@ html, body {
     scroll-behavior: smooth;
 }
 
-/* CSS Variables - Konsisten dengan halaman lain (hanya ungu) */
-:root {
-    --mht-about-primary: #9C27B0;
-    --mht-about-primary-dark: #7B1FA2;
-    --mht-about-primary-light: rgba(156, 39, 176, 0.1);
-    --mht-about-text-dark: #121212;
-    --mht-about-text-body: #333333;
-    --mht-about-text-muted: #666666;
-    --mht-about-bg-light: #f8f8fc;
-    --mht-about-bg-white: #ffffff;
-    --mht-about-border: rgba(0, 0, 0, 0.05);
-    --mht-about-shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
-    --mht-about-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
-    --mht-about-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --mht-about-radius: 20px;
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-about-primary), var(--mht-about-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+    transition: var(--mht-about-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-about-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-about-primary) var(--bg-light);
 }
 
 /* Container */
@@ -729,6 +760,10 @@ html, body {
 }
 
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
     .mht-about-hero {
         padding: 80px 0 50px 0;
     }
@@ -788,6 +823,11 @@ html, body {
     .mht-about-why-card {
         padding: 20px;
     }
+}
+
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
 }
 </style>
 
@@ -961,7 +1001,7 @@ html, body {
             <div class="mht-about-vision-grid">
                 <div class="mht-about-vision-card">
                     <div class="mht-about-vision-icon">
-                        <i class="fa-solid fa-eye"></i>
+                        <i class="fas fa-eye"></i>
                     </div>
                     <h3>Visi</h3>
                     <p>Menjadi mitra terdepan dalam layanan pengembangan, maintenance, dan restyle website yang inovatif dan berkualitas di Indonesia, yang digerakkan oleh generasi muda berbakat.</p>
@@ -969,7 +1009,7 @@ html, body {
                 
                 <div class="mht-about-vision-card">
                     <div class="mht-about-vision-icon">
-                        <i class="fa-solid fa-bullseye"></i>
+                        <i class="fas fa-bullseye"></i>
                     </div>
                     <h3>Misi</h3>
                     <ul class="mht-about-vision-list">
@@ -996,7 +1036,7 @@ html, body {
             <div class="mht-about-why-grid">
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-code"></i>
+                        <i class="fas fa-code"></i>
                     </div>
                     <h4>Pengembangan Website</h4>
                     <p>Website custom sesuai kebutuhan bisnis Anda dengan teknologi modern dan responsive.</p>
@@ -1004,7 +1044,7 @@ html, body {
                 
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-gear"></i>
+                        <i class="fas fa-cog"></i>
                     </div>
                     <h4>Maintenance Rutin</h4>
                     <p>Update konten, backup data, monitoring keamanan, dan perbaikan bug secara berkala.</p>
@@ -1012,7 +1052,7 @@ html, body {
                 
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-paint-roller"></i>
+                        <i class="fas fa-paint-roller"></i>
                     </div>
                     <h4>Restyle Website</h4>
                     <p>Perbarui tampilan website Anda agar lebih modern, fresh, dan sesuai dengan brand terkini.</p>
@@ -1020,7 +1060,7 @@ html, body {
                 
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-headset"></i>
+                        <i class="fas fa-headset"></i>
                     </div>
                     <h4>Dukungan 24/7</h4>
                     <p>Tim support siap membantu Anda kapan pun dibutuhkan dengan response cepat.</p>
@@ -1028,7 +1068,7 @@ html, body {
                 
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h4>Anak Muda Berbakat</h4>
                     <p>Tim muda dengan energi tinggi, kreativitas tanpa batas, dan harga yang bersahabat.</p>
@@ -1036,7 +1076,7 @@ html, body {
                 
                 <div class="mht-about-why-card">
                     <div class="mht-about-why-icon">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <i class="fas fa-hand-holding-heart"></i>
                     </div>
                     <h4>Harga Terjangkau</h4>
                     <p>Kualitas profesional dengan harga yang ramah di kantong, cocok untuk UMKM dan bisnis kecil.</p>
@@ -1045,5 +1085,55 @@ html, body {
         </div>
     </div>
 </section>
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

@@ -2,6 +2,10 @@
 <?php include 'includes/header.php'; ?>
 <?php include __DIR__ . '/../webmaster/includes/db.php'; ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <style>
     /* MHTeams - Professional Styling with Poppins Font
    Color Palette:
@@ -97,6 +101,33 @@ img {
 
 .mht-text-center {
     text-align: center;
+}
+
+/* ===== CUSTOM SCROLLBAR - KONSISTEN DENGAN HALAMAN LAIN ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+    transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg-light);
 }
 
 /* ===== HERO SECTION ===== */
@@ -1789,25 +1820,6 @@ section:nth-child(even) {
     left: 100%;
 }
 
-/* ===== CUSTOM SCROLLBAR ===== */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-light);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border-radius: 6px;
-    border: 3px solid var(--bg-light);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
-}
-
 /* ===== ERROR MESSAGE STYLING ===== */
 .mht-error {
     background: linear-gradient(135deg, #ffebee, #ffcdd2);
@@ -1822,6 +1834,10 @@ section:nth-child(even) {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
     .mht-modal-nav {
         width: 40px;
         height: 40px;
@@ -1883,7 +1899,7 @@ section:nth-child(even) {
         </h2>
         <p class="mht-hero-subtitle">Innovating Ideas, Empowering Creativity - Solusi Digital Terpercaya untuk Bisnis Anda</p>
         <a href="#explore" class="mht-btn-explore">
-            Jelajahi Sekarang <i class="fa-solid fa-arrow-down"></i>
+            Jelajahi Sekarang <i class="fas fa-arrow-down"></i>
         </a>
     </div>
 </section>    
@@ -1891,7 +1907,7 @@ section:nth-child(even) {
 <!-- 📌 About Section -->
 <section id="mht-about" class="mht-about-section" data-aos="fade-up">
     <div class="mht-about-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-microchip"></i> Selamat Datang di <span class="mht-brand">PT MicroHelix Tech Solutions</span></h2>
+        <h2 class="mht-section-title"><i class="fas fa-microchip"></i> Selamat Datang di <span class="mht-brand">PT MicroHelix Tech Solutions</span></h2>
         <p class="mht-about-description">
             PT MicroHelix Tech Solutions adalah perusahaan teknologi yang berfokus pada pengembangan solusi digital inovatif 
             untuk membantu bisnis berkembang di era digital. Kami menghadirkan layanan berkualitas tinggi dengan pendekatan 
@@ -1919,7 +1935,7 @@ section:nth-child(even) {
             </div>
         </div>
         <a href="/tentang-kami" class="mht-btn-learn-more">
-            <i class="fa-solid fa-circle-info"></i> Tentang Perusahaan
+            <i class="fas fa-info-circle"></i> Tentang Perusahaan
         </a>
     </div>
 </section>
@@ -1970,7 +1986,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-handshake"></i>
+                <i class="fas fa-handshake"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Mitra</h3>
             <p class="mht-empty-text">Saat ini belum ada data mitra dan kolaborator. Silakan kembali lagi nanti.</p>
@@ -1982,7 +1998,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-handshake"></i>
+                <i class="fas fa-handshake"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Mitra</h3>
             <p class="mht-empty-text">Saat ini belum ada data mitra dan kolaborator. Silakan kembali lagi nanti.</p>
@@ -1996,7 +2012,7 @@ section:nth-child(even) {
 <!-- 👥 Our Clients Section - Premium Autoplay Only -->
 <section class="mht-clients-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-handshake"></i> Klien <span>Kami</span></h2>
+        <h2 class="mht-section-title"><i class="fas fa-handshake"></i> Klien <span>Kami</span></h2>
         <p class="mht-section-subtitle">Beberapa perusahaan dan brand yang telah mempercayakan layanan kami</p>
 
         <!-- Clients Swiper - No Navigation, No Pagination, Just Autoplay -->
@@ -2047,7 +2063,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-users"></i>
+                <i class="fas fa-users"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Klien</h3>
             <p class="mht-empty-text">Saat ini belum ada data klien. Silakan kembali lagi nanti.</p>
@@ -2059,7 +2075,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-users"></i>
+                <i class="fas fa-users"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Klien</h3>
             <p class="mht-empty-text">Saat ini belum ada data klien. Silakan kembali lagi nanti.</p>
@@ -2069,7 +2085,7 @@ section:nth-child(even) {
         ?>
 
         <div class="mht-text-center" style="margin-top: 3rem;">
-            <a href="/testimoni" class="mht-btn-view-all">Lihat Semua Testimoni <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/testimoni" class="mht-btn-view-all">Lihat Semua Testimoni <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </section>
@@ -2077,7 +2093,7 @@ section:nth-child(even) {
 <!-- 📢 Ratecard Section -->
 <section id="mht-ratecard" class="mht-ratecard-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-tags"></i> Layanan Pembuatan Website</h2>
+        <h2 class="mht-section-title"><i class="fas fa-tags"></i> Layanan Pembuatan Website</h2>
         <p class="mht-section-subtitle">Solusi profesional dari PT MicroHelix Tech Solutions untuk kebutuhan digital Anda</p>
         
         <div class="mht-ratecard-grid">
@@ -2103,12 +2119,12 @@ section:nth-child(even) {
                     foreach ($features as $feature): 
                     ?>
                     <li class="mht-feature-item">
-                        <i class="fa-solid fa-check-circle"></i> <?php echo htmlspecialchars(trim($feature)); ?>
+                        <i class="fas fa-check-circle"></i> <?php echo htmlspecialchars(trim($feature)); ?>
                     </li>
                     <?php endforeach; ?>
                 </ul>
                 <a href="/detail-paket?slug=<?php echo urlencode($package['slug']); ?>" class="mht-btn-ratecard">
-                    Pilih Layanan <i class="fa-solid fa-arrow-right"></i>
+                    Pilih Layanan <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             <?php 
@@ -2131,7 +2147,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-tags"></i>
+                <i class="fas fa-tags"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Layanan</h3>
             <p class="mht-empty-text">Saat ini belum ada data layanan. Silakan kembali lagi nanti.</p>
@@ -2143,7 +2159,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-tags"></i>
+                <i class="fas fa-tags"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Layanan</h3>
             <p class="mht-empty-text">Saat ini belum ada data layanan. Silakan kembali lagi nanti.</p>
@@ -2154,7 +2170,7 @@ section:nth-child(even) {
         
         <div class="mht-text-center">
             <a href="/paket-kami" class="mht-btn-view-all">
-                Lihat Semua Layanan <i class="fa-solid fa-chevron-right"></i>
+                Lihat Semua Layanan <i class="fas fa-chevron-right"></i>
             </a>
         </div>
     </div>
@@ -2163,7 +2179,7 @@ section:nth-child(even) {
 <!-- 📌 Projects Section -->
 <section id="mht-projects" class="mht-projects-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-laptop-code"></i> Portofolio Proyek</h2>
+        <h2 class="mht-section-title"><i class="fas fa-laptop-code"></i> Portofolio Proyek</h2>
         <p class="mht-section-subtitle">
             Berikut adalah beberapa proyek inovatif yang telah dikembangkan oleh PT MicroHelix Tech Solutions.
         </p>
@@ -2191,21 +2207,21 @@ section:nth-child(even) {
                          loading="lazy"
                          onerror="this.src='/webmaster/uploads/default-project.jpg'" />
                     <div class="mht-project-overlay">
-                        <i class="fa-solid fa-<?php echo $projectIcon; ?>"></i>
+                        <i class="fas fa-<?php echo $projectIcon; ?>"></i>
                     </div>
                 </div>
                 <div class="mht-project-info">
-                    <h3 class="mht-project-title"><i class="fa-solid fa-<?php echo $projectIcon; ?>"></i> <?php echo $projectName; ?></h3>
+                    <h3 class="mht-project-title"><i class="fas fa-<?php echo $projectIcon; ?>"></i> <?php echo $projectName; ?></h3>
                     <p class="mht-project-description">
                         <?php echo strlen($projectDesc) > 120 ? substr(strip_tags($projectDesc), 0, 120) . '...' : $projectDesc; ?>
                     </p>
                     <div class="mht-project-actions">
                         <a href="/detail-proyek?slug=<?php echo urlencode($projectSlug); ?>" class="mht-btn-project-detail" aria-label="Detail proyek <?php echo $projectName; ?>">
-                            <i class="fa-solid fa-info-circle"></i> Detail
+                            <i class="fas fa-info-circle"></i> Detail
                         </a>
                         <?php if ($projectUrl): ?>
                         <a href="<?php echo $projectUrl; ?>" target="_blank" rel="noopener noreferrer" class="mht-btn-project" aria-label="Kunjungi proyek <?php echo $projectName; ?>">
-                            <i class="fa-solid fa-arrow-right"></i> Kunjungi
+                            <i class="fas fa-arrow-right"></i> Kunjungi
                         </a>
                         <?php endif; ?>
                     </div>
@@ -2231,7 +2247,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-laptop-code"></i>
+                <i class="fas fa-laptop-code"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Proyek</h3>
             <p class="mht-empty-text">Saat ini belum ada data proyek. Silakan kembali lagi nanti.</p>
@@ -2243,7 +2259,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-laptop-code"></i>
+                <i class="fas fa-laptop-code"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Proyek</h3>
             <p class="mht-empty-text">Saat ini belum ada data proyek. Silakan kembali lagi nanti.</p>
@@ -2254,7 +2270,7 @@ section:nth-child(even) {
 
         <div class="mht-text-center" style="margin-top: 2rem;">
             <a href="/proyek-kami" class="mht-btn-view-all" aria-label="Lihat semua portofolio">
-                Lihat Semua Portofolio <i class="fa-solid fa-chevron-right"></i>
+                Lihat Semua Portofolio <i class="fas fa-chevron-right"></i>
             </a>
         </div>
     </div>
@@ -2263,7 +2279,7 @@ section:nth-child(even) {
 <!-- 📰 News Section - Premium Design -->
 <section class="mht-news-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-newspaper"></i> Berita <span>Terbaru</span></h2>
+        <h2 class="mht-section-title"><i class="fas fa-newspaper"></i> Berita <span>Terbaru</span></h2>
         <p class="mht-section-subtitle">Ikuti perkembangan dan informasi terbaru dari PT MicroHelix Tech Solutions</p>
 
         <div class="mht-news-grid">
@@ -2287,16 +2303,19 @@ section:nth-child(even) {
                 <div class="mht-news-image-wrapper">
                     <img src="/webmaster/uploads/<?php echo $image; ?>" alt="<?php echo $title; ?>" class="mht-news-image" onerror="this.src='/webmaster/uploads/default-news.jpg'">
                     <span class="mht-news-category"><?php echo $category; ?></span>
-                    <span class="mht-news-date"><i class="fa-regular fa-calendar"></i> <?php echo $date; ?></span>
+                    <span class="mht-news-date"><i class="far fa-calendar"></i> <?php echo $date; ?></span>
                 </div>
                 <div class="mht-news-content">
                     <h3 class="mht-news-title"><?php echo $title; ?></h3>
                     <p class="mht-news-excerpt"><?php echo $excerpt; ?></p>
                     <div class="mht-news-meta">
-                        <span class="mht-news-author"><i class="fa-regular fa-user"></i> <?php echo $author; ?></span>
-                        <span class="mht-news-read-time"><i class="fa-regular fa-clock"></i> <?php echo $read_time; ?> menit</span>
+                        <span class="mht-news-author"><i class="far fa-user"></i> <?php echo $author; ?></span>
+                        <span class="mht-news-read-time"><i class="far fa-clock"></i> <?php echo $read_time; ?> menit</span>
                     </div>
-                    <a href="/berita/<?php echo $slug; ?>" class="mht-btn-read-more">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+                    <!-- Link ke halaman detail berita dengan parameter slug -->
+                    <a href="detail-berita?slug=<?php echo urlencode($slug); ?>" class="mht-btn-read-more">
+                        Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
             <?php 
@@ -2319,7 +2338,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-newspaper"></i>
+                <i class="fas fa-newspaper"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Berita</h3>
             <p class="mht-empty-text">Saat ini belum ada berita yang dipublikasikan. Silakan kembali lagi nanti.</p>
@@ -2331,7 +2350,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-newspaper"></i>
+                <i class="fas fa-newspaper"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Berita</h3>
             <p class="mht-empty-text">Saat ini belum ada berita yang dipublikasikan. Silakan kembali lagi nanti.</p>
@@ -2341,7 +2360,7 @@ section:nth-child(even) {
         ?>
 
         <div class="mht-text-center" style="margin-top: 3rem;">
-            <a href="/berita" class="mht-btn-view-all">Lihat Semua Berita <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="berita" class="mht-btn-view-all">Lihat Semua Berita <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </section>
@@ -2349,7 +2368,7 @@ section:nth-child(even) {
 <!-- 🖼️ Gallery Section - From Database with Modal -->
 <section class="mht-gallery-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-images"></i> Galeri <span>Kegiatan</span></h2>
+        <h2 class="mht-section-title"><i class="fas fa-images"></i> Galeri <span>Kegiatan</span></h2>
         <p class="mht-section-subtitle">Dokumentasi berbagai kegiatan dan momen bersama PT MicroHelix Tech Solutions</p>
 
         <div class="mht-gallery-grid" id="mht-gallery-grid">
@@ -2371,7 +2390,7 @@ section:nth-child(even) {
             <div class="mht-gallery-item" onclick="openGalleryModal(<?php echo htmlspecialchars(json_encode($galleryItems), ENT_QUOTES, 'UTF-8'); ?>, <?php echo array_search($gallery, $galleryItems); ?>)">
                 <img src="/webmaster/uploads/<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>" class="mht-gallery-image" onerror="this.src='/webmaster/uploads/default-gallery.jpg'">
                 <div class="mht-gallery-overlay">
-                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    <i class="fas fa-search-plus"></i>
                     <h4><?php echo $title; ?></h4>
                     <p><?php echo $category; ?></p>
                 </div>
@@ -2391,7 +2410,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-images"></i>
+                <i class="fas fa-images"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Galeri</h3>
             <p class="mht-empty-text">Saat ini belum ada foto kegiatan. Silakan kembali lagi nanti.</p>
@@ -2401,16 +2420,16 @@ section:nth-child(even) {
         ?>
 
         <div class="mht-text-center" style="margin-top: 3rem;">
-            <a href="/gallery" class="mht-btn-view-all">Lihat Gallery Lainnya <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/gallery" class="mht-btn-view-all">Lihat Gallery Lainnya <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </section>
 
 <!-- Gallery Modal -->
 <div class="mht-gallery-modal" id="galleryModal">
-    <button class="mht-modal-close" onclick="closeGalleryModal()"><i class="fa-solid fa-xmark"></i></button>
-    <button class="mht-modal-nav prev" onclick="navigateGallery(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="mht-modal-nav next" onclick="navigateGallery(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    <button class="mht-modal-close" onclick="closeGalleryModal()"><i class="fas fa-times"></i></button>
+    <button class="mht-modal-nav prev" onclick="navigateGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="mht-modal-nav next" onclick="navigateGallery(1)"><i class="fas fa-chevron-right"></i></button>
     
     <div class="mht-modal-content">
         <img src="" alt="" class="mht-modal-image" id="modalImage">
@@ -2424,7 +2443,7 @@ section:nth-child(even) {
 <!-- 📅 Events & Programs Section - New Design with 4:5 Thumbnail -->
 <section class="mht-events-section" data-aos="fade-up">
     <div class="mht-container">
-        <h2 class="mht-section-title"><i class="fa-solid fa-calendar-alt"></i> Events & <span>Programs</span></h2>
+        <h2 class="mht-section-title"><i class="fas fa-calendar-alt"></i> Events & <span>Programs</span></h2>
         <p class="mht-section-subtitle">Ikuti berbagai event dan program menarik yang kami selenggarakan</p>
 
         <div class="mht-events-grid">
@@ -2465,8 +2484,8 @@ section:nth-child(even) {
                     <span class="mht-event-badge <?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
                     <div class="mht-event-overlay">
                         <div class="mht-event-quick-info">
-                            <span><i class="fa-regular fa-calendar"></i> <?php echo "$date_day $date_month $date_year"; ?></span>
-                            <span><i class="fa-regular fa-clock"></i> <?php echo $time_display; ?></span>
+                            <span><i class="far fa-calendar"></i> <?php echo "$date_day $date_month $date_year"; ?></span>
+                            <span><i class="far fa-clock"></i> <?php echo $time_display; ?></span>
                         </div>
                     </div>
                 </div>
@@ -2474,9 +2493,9 @@ section:nth-child(even) {
                     <h3 class="mht-event-title"><?php echo $title; ?></h3>
                     
                     <div class="mht-event-details">
-                        <span class="mht-event-detail"><i class="fa-regular fa-location-dot"></i> <?php echo $location; ?></span>
+                        <span class="mht-event-detail"><i class="far fa-location-dot"></i> <?php echo $location; ?></span>
                         <?php if ($capacity > 0): ?>
-                        <span class="mht-event-detail"><i class="fa-regular fa-users"></i> Kuota: <?php echo $registered; ?>/<?php echo $capacity; ?> peserta</span>
+                        <span class="mht-event-detail"><i class="far fa-users"></i> Kuota: <?php echo $registered; ?>/<?php echo $capacity; ?> peserta</span>
                         <?php endif; ?>
                     </div>
                     
@@ -2484,10 +2503,10 @@ section:nth-child(even) {
                     
                     <div class="mht-event-footer">
                         <div class="mht-event-stats">
-                            <span class="mht-event-stat"><i class="fa-regular fa-user"></i> <?php echo $registered; ?> terdaftar</span>
-                            <span class="mht-event-stat"><i class="fa-regular fa-clock"></i> <?php echo $status == 'ongoing' ? 'Sedang berlangsung' : ($status == 'upcoming' ? 'Segera' : 'Selesai'); ?></span>
+                            <span class="mht-event-stat"><i class="far fa-user"></i> <?php echo $registered; ?> terdaftar</span>
+                            <span class="mht-event-stat"><i class="far fa-clock"></i> <?php echo $status == 'ongoing' ? 'Sedang berlangsung' : ($status == 'upcoming' ? 'Segera' : 'Selesai'); ?></span>
                         </div>
-                        <a href="/events/<?php echo $slug; ?>" class="mht-btn-event">Detail <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/events/<?php echo $slug; ?>" class="mht-btn-event">Detail <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -2511,7 +2530,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-calendar-alt"></i>
+                <i class="fas fa-calendar-alt"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Event</h3>
             <p class="mht-empty-text">Saat ini belum ada event yang tersedia. Silakan kembali lagi nanti.</p>
@@ -2523,7 +2542,7 @@ section:nth-child(even) {
         ?>
         <div class="mht-empty-state">
             <div class="mht-empty-icon">
-                <i class="fa-solid fa-calendar-alt"></i>
+                <i class="fas fa-calendar-alt"></i>
             </div>
             <h3 class="mht-empty-title">Belum Ada Event</h3>
             <p class="mht-empty-text">Saat ini belum ada event yang tersedia. Silakan kembali lagi nanti.</p>
@@ -2533,7 +2552,7 @@ section:nth-child(even) {
         ?>
 
         <div class="mht-text-center" style="margin-top: 3rem;">
-            <a href="/events" class="mht-btn-view-all">Lihat Semua Event <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/events" class="mht-btn-view-all">Lihat Semua Event <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 </section>
@@ -2547,7 +2566,7 @@ section:nth-child(even) {
             Mari berkolaborasi dan wujudkan ide-ide kreatif Anda!
         </p>
         <a href="/pengajuan-kolaborasi" class="mht-btn-collab">
-            <i class="fa-solid fa-handshake"></i> Ajukan Kerjasama
+            <i class="fas fa-handshake"></i> Ajukan Kerjasama
         </a>
     </div>
 </section>
@@ -2693,6 +2712,32 @@ section:nth-child(even) {
                 clientsSwiper.update();
             }
         });
+
+        // Font Awesome fallback check
+        function checkFontAwesome() {
+            var testElement = document.createElement('span');
+            testElement.className = 'fas';
+            testElement.style.display = 'none';
+            document.body.appendChild(testElement);
+            
+            // Get computed style
+            var computedStyle = window.getComputedStyle(testElement);
+            var fontFamily = computedStyle.getPropertyValue('font-family');
+            
+            // Check if Font Awesome is loaded
+            if (!fontFamily.includes('Font Awesome')) {
+                console.log('Font Awesome not loaded, loading fallback...');
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+                document.head.appendChild(link);
+            }
+            
+            document.body.removeChild(testElement);
+        }
+        
+        // Run check after a short delay
+        setTimeout(checkFontAwesome, 100);
     });
 
     // Gallery Modal Functions
@@ -2753,5 +2798,10 @@ section:nth-child(even) {
         }
     });
 </script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

@@ -28,6 +28,10 @@ try {
 }
 ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <!-- Testimonials Section -->
 <section id="mht-testimonials-section" class="mht-testimonials-section">
     <!-- Background Pattern -->
@@ -43,7 +47,7 @@ try {
 
         <?php if (!empty($error_message)): ?>
             <div class="mht-testimonials-error">
-                <i class="fa-solid fa-circle-exclamation"></i>
+                <i class="fas fa-exclamation-circle"></i>
                 <span><?php echo htmlspecialchars($error_message); ?></span>
             </div>
         <?php endif; ?>
@@ -51,7 +55,7 @@ try {
         <div class="mht-testimonials-grid">
             <?php if (empty($testimonials) && empty($error_message)): ?>
                 <div class="mht-testimonials-empty">
-                    <i class="fa-regular fa-comment-dots"></i>
+                    <i class="far fa-comment-dots"></i>
                     <span>Belum ada testimoni yang tersedia.</span>
                 </div>
             <?php else: ?>
@@ -97,7 +101,7 @@ try {
                     <div class="mht-testimonials-card-inner">
                         <!-- Quote Icon -->
                         <div class="mht-testimonials-quote-icon">
-                            <i class="fa-solid fa-quote-right"></i>
+                            <i class="fas fa-quote-right"></i>
                         </div>
                         
                         <div class="mht-testimonials-header">
@@ -122,14 +126,14 @@ try {
                             <div class="mht-testimonials-rating">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                     <?php if ($i <= $rating): ?>
-                                        <i class="fa-solid fa-star mht-testimonials-star-active"></i>
+                                        <i class="fas fa-star mht-testimonials-star-active"></i>
                                     <?php else: ?>
-                                        <i class="fa-regular fa-star mht-testimonials-star-inactive"></i>
+                                        <i class="far fa-star mht-testimonials-star-inactive"></i>
                                     <?php endif; ?>
                                 <?php endfor; ?>
                             </div>
                             <div class="mht-testimonials-date">
-                                <i class="fa-regular fa-calendar"></i>
+                                <i class="far fa-calendar"></i>
                                 <span><?php echo $date; ?></span>
                             </div>
                         </div>
@@ -142,27 +146,10 @@ try {
 </section>
 
 <style>
-/* ===== MHT TESTIMONIALS STYLES - NO WHITE SPACE ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+/* ===== MHT TESTIMONIALS STYLES - WITH CUSTOM SCROLLBAR ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Reset total */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
-    font-family: 'Poppins', sans-serif;
-}
-
-/* CSS Variables */
+/* CSS Variables - Konsisten dengan halaman lain */
 :root {
     --mht-testimonials-primary: #9C27B0;
     --mht-testimonials-primary-dark: #7B1FA2;
@@ -178,6 +165,51 @@ html, body {
     --mht-testimonials-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-testimonials-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-testimonials-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan home page */
+}
+
+/* Reset total */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-testimonials-primary), var(--mht-testimonials-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+    transition: var(--mht-testimonials-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-testimonials-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-testimonials-primary) var(--bg-light);
 }
 
 /* Main Section */
@@ -288,6 +320,9 @@ html, body {
     position: relative;
     height: 100%;
     width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtTestimonialsSlideIn 0.5s ease forwards;
 }
 
 .mht-testimonials-card::before {
@@ -380,6 +415,11 @@ html, body {
     color: var(--mht-testimonials-text-dark);
     margin-bottom: 4px;
     font-family: 'Poppins', sans-serif;
+    transition: var(--mht-testimonials-transition);
+}
+
+.mht-testimonials-card:hover .mht-testimonials-name {
+    color: var(--mht-testimonials-primary);
 }
 
 .mht-testimonials-role {
@@ -486,6 +526,36 @@ html, body {
     color: #B91C1C;
 }
 
+/* Animations */
+@keyframes mhtTestimonialsSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation */
+.mht-testimonials-card:nth-child(1) { animation-delay: 0.1s; }
+.mht-testimonials-card:nth-child(2) { animation-delay: 0.15s; }
+.mht-testimonials-card:nth-child(3) { animation-delay: 0.2s; }
+.mht-testimonials-card:nth-child(4) { animation-delay: 0.25s; }
+.mht-testimonials-card:nth-child(5) { animation-delay: 0.3s; }
+.mht-testimonials-card:nth-child(6) { animation-delay: 0.35s; }
+.mht-testimonials-card:nth-child(7) { animation-delay: 0.4s; }
+.mht-testimonials-card:nth-child(8) { animation-delay: 0.45s; }
+.mht-testimonials-card:nth-child(9) { animation-delay: 0.5s; }
+.mht-testimonials-card:nth-child(10) { animation-delay: 0.55s; }
+
+/* Hover effect for stars */
+.mht-testimonials-card:hover .mht-testimonials-star-active {
+    animation: mhtTestimonialsStarPulse 0.5s ease;
+}
+
+@keyframes mhtTestimonialsStarPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 992px) {
     .mht-testimonials-grid {
@@ -495,6 +565,10 @@ html, body {
 }
 
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
     .mht-testimonials-section {
         padding: 20px 0 60px 0;
     }
@@ -569,45 +643,60 @@ html, body {
     }
 }
 
-/* Animation */
-.mht-testimonials-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: mhtTestimonialsSlideIn 0.5s ease forwards;
-}
-
-.mht-testimonials-card:nth-child(1) { animation-delay: 0.1s; }
-.mht-testimonials-card:nth-child(2) { animation-delay: 0.15s; }
-.mht-testimonials-card:nth-child(3) { animation-delay: 0.2s; }
-.mht-testimonials-card:nth-child(4) { animation-delay: 0.25s; }
-.mht-testimonials-card:nth-child(5) { animation-delay: 0.3s; }
-.mht-testimonials-card:nth-child(6) { animation-delay: 0.35s; }
-.mht-testimonials-card:nth-child(7) { animation-delay: 0.4s; }
-.mht-testimonials-card:nth-child(8) { animation-delay: 0.45s; }
-.mht-testimonials-card:nth-child(9) { animation-delay: 0.5s; }
-.mht-testimonials-card:nth-child(10) { animation-delay: 0.55s; }
-
-@keyframes mhtTestimonialsSlideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Hover effect */
-.mht-testimonials-card:hover .mht-testimonials-name {
-    color: var(--mht-testimonials-primary);
-    transition: var(--mht-testimonials-transition);
-}
-
-.mht-testimonials-card:hover .mht-testimonials-star-active {
-    animation: mhtTestimonialsStarPulse 0.5s ease;
-}
-
-@keyframes mhtTestimonialsStarPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
 }
 </style>
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

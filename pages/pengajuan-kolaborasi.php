@@ -61,9 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <style>
-    /* ===== MHT COLLAB FORM STYLES - CONSISTENT WITH WEBSITE ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    /* ===== MHT COLLAB FORM STYLES - WITH CUSTOM SCROLLBAR ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
     :root {
         --primary: #9C27B0;
@@ -80,20 +84,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         --radius-md: 8px;
         --radius-lg: 16px;
         --radius-full: 9999px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Reset total */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    body {
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
         font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
         background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
         color: var(--text-body);
         line-height: 1.6;
         min-height: 100vh;
+    }
+
+    /* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-light);
+        border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        border-radius: 6px;
+        border: 3px solid var(--bg-light);
+        transition: var(--transition);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-dark);
+    }
+
+    /* Firefox scrollbar */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) var(--bg-light);
     }
 
     /* Container */
@@ -122,6 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         border: 1px solid rgba(156, 39, 176, 0.2);
         text-transform: uppercase;
         backdrop-filter: blur(5px);
+        animation: mhtFadeIn 1s ease;
     }
 
     .mht-collab-title {
@@ -130,6 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         color: var(--text-dark);
         margin-bottom: 12px;
         line-height: 1.2;
+        animation: mhtFadeInUp 1s ease 0.2s both;
     }
 
     .mht-collab-title span {
@@ -143,6 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         max-width: 600px;
         margin: 0 auto;
         line-height: 1.6;
+        animation: mhtFadeInUp 1s ease 0.4s both;
     }
 
     /* Message Alert */
@@ -193,6 +237,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    @keyframes mhtFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes mhtFadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     /* Form Card */
     .mht-collab-form {
         background: #fff;
@@ -203,6 +263,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         transition: var(--transition);
         position: relative;
         overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: mhtFadeInUp 0.5s ease 0.6s forwards;
     }
 
     .mht-collab-form::before {
@@ -386,6 +449,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         font-size: 0.9rem;
         color: var(--text-muted);
         border-left: 3px solid var(--primary);
+        transition: var(--transition);
+    }
+
+    .mht-form-note:hover {
+        background: rgba(156, 39, 176, 0.15);
     }
 
     .mht-form-note i {
@@ -399,8 +467,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         line-height: 1.6;
     }
 
-    /* Responsive */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
         .mht-collab-form {
             padding: 30px 25px;
         }
@@ -433,20 +505,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 0.9rem;
         }
     }
-
-    /* Animation */
-    .mht-collab-form {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: mhtFadeInUp 0.5s ease forwards;
-    }
-
-    @keyframes mhtFadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 </style>
 
 <div class="mht-collab-container">
@@ -460,7 +518,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Alert Message -->
     <?php if (!empty($message)): ?>
         <div class="mht-alert <?php echo $messageType; ?>">
-            <i class="fa-solid <?php echo $messageType === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'; ?>"></i>
+            <i class="fas <?php echo $messageType === 'success' ? 'fa-circle-check' : 'fa-exclamation-circle'; ?>"></i>
             <span><?php echo htmlspecialchars($message); ?></span>
         </div>
     <?php endif; ?>
@@ -470,7 +528,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Nama/Instansi -->
         <div class="mht-form-group">
             <label class="mht-form-label">
-                <i class="fa-regular fa-building"></i>
+                <i class="far fa-building"></i>
                 Nama / Instansi <span>*</span>
             </label>
             <input type="text" name="nama_instansi" class="mht-form-input" placeholder="Masukkan nama atau instansi Anda" required>
@@ -479,7 +537,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Kontak -->
         <div class="mht-form-group">
             <label class="mht-form-label">
-                <i class="fa-regular fa-phone"></i>
+                <i class="far fa-phone-alt"></i>
                 Kontak yang dapat dihubungi <span>*</span>
             </label>
             <input type="text" name="kontak" class="mht-form-input" placeholder="Email / No. WhatsApp / Telepon" required>
@@ -488,7 +546,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Barter Value -->
         <div class="mht-form-group">
             <label class="mht-form-label">
-                <i class="fa-regular fa-handshake"></i>
+                <i class="far fa-handshake"></i>
                 Barter Value / Keuntungan yang diinginkan <span>*</span>
             </label>
             <textarea name="barter_value" class="mht-form-textarea" placeholder="Jelaskan keuntungan atau barter yang Anda inginkan dari kerjasama ini" required></textarea>
@@ -497,14 +555,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- File Upload -->
         <div class="mht-form-group">
             <label class="mht-form-label">
-                <i class="fa-regular fa-file"></i>
+                <i class="far fa-file"></i>
                 Upload Lampiran
             </label>
             <div class="mht-file-input">
                 <input type="file" name="lampiran" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
             </div>
             <div class="mht-file-note">
-                <i class="fa-regular fa-circle-info"></i>
+                <i class="fas fa-info-circle"></i>
                 Format: JPG, PNG, PDF, DOC, DOCX. Maksimal 5MB
             </div>
         </div>
@@ -512,15 +570,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Submit Button -->
         <button type="submit" class="mht-btn-submit">
             <span>Kirim Pengajuan</span>
-            <i class="fa-regular fa-paper-plane"></i>
+            <i class="far fa-paper-plane"></i>
         </button>
 
         <!-- Info Note -->
         <div class="mht-form-note">
-            <i class="fa-regular fa-shield-check"></i>
+            <i class="fas fa-shield-alt"></i>
             <p>Data Anda akan kami jaga kerahasiaannya. Tim kami akan merespon maksimal 2x24 jam setelah pengajuan diterima.</p>
         </div>
     </form>
 </div>
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

@@ -34,6 +34,10 @@ $projectImage = htmlspecialchars($project['image']);
 $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
 ?>
 
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
 <!-- Project Detail Section -->
 <section id="mht-project-detail" class="mht-project-detail-section">
     <!-- Background Pattern -->
@@ -42,7 +46,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
     <div class="mht-project-detail-container">
         <!-- Back Button -->
         <a href="proyek-kami.php" class="mht-project-detail-back">
-            <i class="fa-regular fa-arrow-left"></i>
+            <i class="fas fa-arrow-left"></i>
             <span>Kembali ke Semua Proyek</span>
         </a>
 
@@ -52,7 +56,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                 <div class="mht-project-detail-header">
                     <span class="mht-project-detail-badge">DETAIL PROYEK</span>
                     <h1 class="mht-project-detail-title">
-                        <i class="fa-solid fa-<?php echo $projectIcon; ?>"></i>
+                        <i class="fas fa-<?php echo $projectIcon; ?>"></i>
                         <?php echo $projectName; ?>
                     </h1>
                 </div>
@@ -64,14 +68,14 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                          loading="lazy" 
                          class="mht-project-detail-image" />
                     <div class="mht-project-detail-image-overlay">
-                        <i class="fa-solid fa-<?php echo $projectIcon; ?>"></i>
+                        <i class="fas fa-<?php echo $projectIcon; ?>"></i>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="mht-project-detail-description-wrapper">
                     <h2 class="mht-project-detail-subtitle">
-                        <i class="fa-regular fa-file-lines"></i>
+                        <i class="far fa-file-lines"></i>
                         Tentang Proyek
                     </h2>
                     <div class="mht-project-detail-description">
@@ -82,7 +86,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                 <!-- Project Info Cards -->
                 <div class="mht-project-detail-info-grid">
                     <div class="mht-project-detail-info-card">
-                        <i class="fa-regular fa-calendar"></i>
+                        <i class="far fa-calendar"></i>
                         <div>
                             <span class="mht-project-detail-info-label">Tanggal Rilis</span>
                             <span class="mht-project-detail-info-value">
@@ -98,7 +102,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                     </div>
                     
                     <div class="mht-project-detail-info-card">
-                        <i class="fa-regular fa-folder-open"></i>
+                        <i class="far fa-folder-open"></i>
                         <div>
                             <span class="mht-project-detail-info-label">Kategori</span>
                             <span class="mht-project-detail-info-value">
@@ -119,7 +123,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                     </div>
                     
                     <div class="mht-project-detail-info-card">
-                        <i class="fa-regular fa-circle-check"></i>
+                        <i class="far fa-circle-check"></i>
                         <div>
                             <span class="mht-project-detail-info-label">Status</span>
                             <span class="mht-project-detail-info-value status-active">Selesai & Live</span>
@@ -134,9 +138,9 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                            class="mht-project-detail-btn-visit" 
                            target="_blank" 
                            rel="noopener noreferrer">
-                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <i class="fas fa-external-link-alt"></i>
                             <span>Kunjungi Proyek</span>
-                            <i class="fa-regular fa-arrow-right-long mht-project-detail-btn-icon"></i>
+                            <i class="fas fa-arrow-right mht-project-detail-btn-icon"></i>
                         </a>
                     <?php endif; ?>
                 </div>
@@ -147,7 +151,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                 <!-- Tech Stack -->
                 <div class="mht-project-detail-card">
                     <h3 class="mht-project-detail-card-title">
-                        <i class="fa-solid fa-code"></i>
+                        <i class="fas fa-code"></i>
                         Tech Stack
                     </h3>
                     <div class="mht-project-detail-tech-stack">
@@ -174,44 +178,44 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
                 <!-- Key Features -->
                 <div class="mht-project-detail-card">
                     <h3 class="mht-project-detail-card-title">
-                        <i class="fa-regular fa-star"></i>
+                        <i class="far fa-star"></i>
                         Fitur Utama
                     </h3>
                     <ul class="mht-project-detail-features-list">
-                        <li><i class="fa-regular fa-circle-check"></i> Responsive Design</li>
-                        <li><i class="fa-regular fa-circle-check"></i> Modern UI/UX</li>
-                        <li><i class="fa-regular fa-circle-check"></i> Optimized Performance</li>
-                        <li><i class="fa-regular fa-circle-check"></i> Cross-browser Compatible</li>
-                        <li><i class="fa-regular fa-circle-check"></i> SEO Friendly</li>
+                        <li><i class="far fa-circle-check"></i> Responsive Design</li>
+                        <li><i class="far fa-circle-check"></i> Modern UI/UX</li>
+                        <li><i class="far fa-circle-check"></i> Optimized Performance</li>
+                        <li><i class="far fa-circle-check"></i> Cross-browser Compatible</li>
+                        <li><i class="far fa-circle-check"></i> SEO Friendly</li>
                     </ul>
                 </div>
 
                 <!-- Share -->
                 <div class="mht-project-detail-card">
                     <h3 class="mht-project-detail-card-title">
-                        <i class="fa-regular fa-share-nodes"></i>
+                        <i class="fas fa-share-alt"></i>
                         Bagikan Proyek
                     </h3>
                     <div class="mht-project-detail-share">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" 
                            target="_blank" 
                            class="mht-project-detail-share-btn facebook">
-                            <i class="fa-brands fa-facebook-f"></i>
+                            <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>&text=<?php echo urlencode($projectName); ?>" 
                            target="_blank" 
                            class="mht-project-detail-share-btn twitter">
-                            <i class="fa-brands fa-x-twitter"></i>
+                            <i class="fab fa-x-twitter"></i>
                         </a>
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" 
                            target="_blank" 
                            class="mht-project-detail-share-btn linkedin">
-                            <i class="fa-brands fa-linkedin-in"></i>
+                            <i class="fab fa-linkedin-in"></i>
                         </a>
                         <a href="https://wa.me/?text=<?php echo urlencode($projectName . ' - ' . 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" 
                            target="_blank" 
                            class="mht-project-detail-share-btn whatsapp">
-                            <i class="fa-brands fa-whatsapp"></i>
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
@@ -221,25 +225,8 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
 </section>
 
 <style>
-/* ===== MHT PROJECT DETAIL STYLES - NO WHITE SPACE ===== */
+/* ===== MHT PROJECT DETAIL STYLES - WITH CUSTOM SCROLLBAR ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-/* Reset total */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
-    font-family: 'Poppins', sans-serif;
-}
 
 /* CSS Variables */
 :root {
@@ -256,6 +243,51 @@ html, body {
     --mht-project-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-project-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-project-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan halaman lain */
+}
+
+/* Reset total */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-project-primary), var(--mht-project-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+    transition: var(--mht-project-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-project-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-project-primary) var(--bg-light);
 }
 
 /* Main Section */
@@ -680,7 +712,7 @@ html, body {
     filter: brightness(1.1);
 }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .mht-project-detail-wrapper {
         grid-template-columns: 1fr;
@@ -692,6 +724,10 @@ html, body {
 }
 
 @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
     .mht-project-detail-section {
         padding: 20px 0 60px 0;
     }
@@ -759,6 +795,61 @@ html, body {
         transform: translateY(0);
     }
 }
+
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
+}
 </style>
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>

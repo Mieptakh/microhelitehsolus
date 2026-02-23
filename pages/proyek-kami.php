@@ -26,7 +26,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
 
                 if ($stmt->rowCount() === 0) {
                     echo "<div class='mht-projects-empty'>";
-                    echo "<i class='fa-regular fa-folder-open'></i>";
+                    echo "<i class='far fa-folder-open'></i>";
                     echo "<span>Tidak ada proyek yang tersedia saat ini.</span>";
                     echo "</div>";
                 } else {
@@ -65,13 +65,13 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
                          loading="lazy" 
                          class="mht-projects-image" />
                     <div class="mht-projects-image-overlay">
-                        <i class="fa-solid fa-<?php echo $projectIcon; ?>"></i>
+                        <i class="fas fa-<?php echo $projectIcon; ?>"></i>
                     </div>
                 </div>
                 
                 <div class="mht-projects-info">
                     <h3 class="mht-projects-name">
-                        <i class="fa-solid fa-<?php echo $projectIcon; ?>"></i> 
+                        <i class="fas fa-<?php echo $projectIcon; ?>"></i> 
                         <?php echo $projectName; ?>
                     </h3>
                     
@@ -83,7 +83,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
                         <a href="detail-proyek?slug=<?php echo urlencode($projectSlug); ?>" 
                            class="mht-projects-btn-detail" 
                            aria-label="Detail proyek <?php echo $projectName; ?>">
-                            <i class="fa-regular fa-eye"></i>
+                            <i class="far fa-eye"></i>
                             <span>Detail Proyek</span>
                         </a>
                         
@@ -93,7 +93,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
                            rel="noopener noreferrer" 
                            class="mht-projects-btn-visit" 
                            aria-label="Kunjungi proyek <?php echo $projectName; ?>">
-                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <i class="fas fa-external-link-alt"></i>
                             <span>Kunjungi</span>
                         </a>
                         <?php endif; ?>
@@ -105,7 +105,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
                 }
             } catch (PDOException $e) {
                 echo "<div class='mht-projects-error'>";
-                echo "<i class='fa-solid fa-circle-exclamation'></i>";
+                echo "<i class='fas fa-exclamation-circle'></i>";
                 echo "<span>Gagal memuat data proyek: " . htmlspecialchars($e->getMessage()) . "</span>";
                 echo "</div>";
             }
@@ -115,28 +115,11 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
 </section>
 
 <style>
-/* ===== MHT PROJECTS STYLES - NO WHITE SPACE ===== */
+/* ===== MHT PROJECTS STYLES - WITH CUSTOM SCROLLBAR ===== */
 /* Import Font Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Reset total untuk menghilangkan area putih */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
-    font-family: 'Poppins', sans-serif;
-}
-
-/* CSS Variables - Sinkron dengan header dan FAQ */
+/* CSS Variables - Konsisten dengan halaman lain */
 :root {
     --mht-projects-primary: #9C27B0;
     --mht-projects-primary-dark: #7B1FA2;
@@ -151,6 +134,49 @@ html, body {
     --mht-projects-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-projects-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-projects-radius: 20px;
+    --bg-light: #F9F9F9; /* Untuk konsistensi dengan home page */
+}
+
+/* Reset total */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f5f5f7 0%, #f0f0f8 100%);
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HOME ===== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--mht-projects-primary), var(--mht-projects-primary-dark));
+    border-radius: 6px;
+    border: 3px solid var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mht-projects-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-projects-primary) var(--bg-light);
 }
 
 /* Main Section - Full coverage */
@@ -240,7 +266,7 @@ html, body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Projects Grid - No gaps */
+/* Projects Grid */
 .mht-projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -261,6 +287,9 @@ html, body {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mhtProjectsSlideIn 0.5s ease forwards;
 }
 
 .mht-projects-card::before {
@@ -360,6 +389,11 @@ html, body {
     color: var(--mht-projects-primary);
     font-size: 1.1rem;
     width: 22px;
+    transition: var(--mht-projects-transition);
+}
+
+.mht-projects-card:hover .mht-projects-name i {
+    transform: scale(1.2);
 }
 
 .mht-projects-description {
@@ -477,11 +511,42 @@ html, body {
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
     border-left: 4px solid #B91C1C;
+    margin-bottom: 30px;
 }
 
 .mht-projects-error i {
     font-size: 1.3rem;
     color: #B91C1C;
+}
+
+/* Animations */
+@keyframes mhtProjectsSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation */
+.mht-projects-card:nth-child(1) { animation-delay: 0.1s; }
+.mht-projects-card:nth-child(2) { animation-delay: 0.15s; }
+.mht-projects-card:nth-child(3) { animation-delay: 0.2s; }
+.mht-projects-card:nth-child(4) { animation-delay: 0.25s; }
+.mht-projects-card:nth-child(5) { animation-delay: 0.3s; }
+.mht-projects-card:nth-child(6) { animation-delay: 0.35s; }
+.mht-projects-card:nth-child(7) { animation-delay: 0.4s; }
+.mht-projects-card:nth-child(8) { animation-delay: 0.45s; }
+.mht-projects-card:nth-child(9) { animation-delay: 0.5s; }
+.mht-projects-card:nth-child(10) { animation-delay: 0.55s; }
+
+/* Hover effect tambahan */
+.mht-projects-card:hover .mht-projects-name i {
+    animation: mhtProjectsIconBounce 0.5s ease;
+}
+
+@keyframes mhtProjectsIconBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 /* ===== RESPONSIVE STYLES ===== */
@@ -545,6 +610,11 @@ html, body {
     .mht-projects-btn-visit {
         width: 100%;
     }
+    
+    /* Scrollbar lebih kecil di mobile */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -566,38 +636,64 @@ html, body {
     }
 }
 
-/* Animation on Scroll */
-.mht-projects-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: mhtProjectsSlideIn 0.5s ease forwards;
-}
-
-.mht-projects-card:nth-child(1) { animation-delay: 0.1s; }
-.mht-projects-card:nth-child(2) { animation-delay: 0.15s; }
-.mht-projects-card:nth-child(3) { animation-delay: 0.2s; }
-.mht-projects-card:nth-child(4) { animation-delay: 0.25s; }
-.mht-projects-card:nth-child(5) { animation-delay: 0.3s; }
-.mht-projects-card:nth-child(6) { animation-delay: 0.35s; }
-.mht-projects-card:nth-child(7) { animation-delay: 0.4s; }
-.mht-projects-card:nth-child(8) { animation-delay: 0.45s; }
-
-@keyframes mhtProjectsSlideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Hover effect tambahan */
-.mht-projects-card:hover .mht-projects-name i {
-    animation: mhtProjectsIconBounce 0.5s ease;
-}
-
-@keyframes mhtProjectsIconBounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+/* Smooth scrolling untuk anchor links */
+html {
+    scroll-padding-top: 80px;
 }
 </style>
+
+<!-- Font Awesome dengan multiple CDN untuk memastikan semua icon tampil -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
+<script>
+// Font Awesome fallback check
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll untuk semua anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fallback check untuk Font Awesome
+    function checkFontAwesome() {
+        var testElement = document.createElement('span');
+        testElement.className = 'fas';
+        testElement.style.display = 'none';
+        document.body.appendChild(testElement);
+        
+        // Get computed style
+        var computedStyle = window.getComputedStyle(testElement);
+        var fontFamily = computedStyle.getPropertyValue('font-family');
+        
+        // Check if Font Awesome is loaded
+        if (!fontFamily.includes('Font Awesome')) {
+            console.log('Font Awesome not loaded, loading fallback...');
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+            document.head.appendChild(link);
+        }
+        
+        document.body.removeChild(testElement);
+    }
+    
+    // Run check after a short delay
+    setTimeout(checkFontAwesome, 100);
+});
+</script>
+
+<!-- Fallback untuk browser tanpa JavaScript -->
+<noscript>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+</noscript>
 
 <?php include 'includes/footer.php'; ?>
