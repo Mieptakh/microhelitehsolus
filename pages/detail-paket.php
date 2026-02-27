@@ -6,7 +6,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php'; // sesuaikan path sesuai
 
 if (!isset($_GET['slug'])) {
     // Redirect ke halaman paket jika slug tidak ditemukan
-    header('Location: paket-kami.php');
+    header('Location: paket-kami');
     exit;
 }
 
@@ -19,7 +19,7 @@ try {
 
     if (!$package) {
         // Redirect ke halaman paket jika paket tidak tersedia
-        header('Location: paket-kami.php');
+        header('Location: paket-kami');
         exit;
     }
 
@@ -44,7 +44,7 @@ try {
     
     <div class="mht-package-detail-container">
         <!-- Back Button -->
-        <a href="paket-kami.php" class="mht-package-detail-back">
+        <a href="paket-kami" class="mht-package-detail-back">
             <i class="fas fa-arrow-left"></i>
             <span>Kembali ke Semua Paket</span>
         </a>
@@ -107,11 +107,11 @@ try {
                         Contoh Tampilan
                     </h2>
                     <div class="mht-package-detail-gallery-grid">
-                        <?php foreach ($screenshots as $img): 
+                        <?php foreach ($screenshots as $index => $img): 
                             $img = trim($img);
                             if (!empty($img)):
                         ?>
-                            <div class="mht-package-detail-gallery-item">
+                            <div class="mht-package-detail-gallery-item" data-index="<?php echo $index; ?>">
                                 <img src="/uploads/<?php echo htmlspecialchars($img); ?>" 
                                      alt="Screenshot <?php echo htmlspecialchars($package['name']); ?>"
                                      loading="lazy">
@@ -150,7 +150,7 @@ try {
                 </div>
             </div>
 
-            <!-- Sidebar - Payment Methods -->
+            <!-- Sidebar - Payment Methods dengan Logo Lokal (Tanpa Teks) -->
             <div class="mht-package-detail-sidebar">
                 <div class="mht-package-detail-payment">
                     <h3 class="mht-package-detail-payment-title">
@@ -166,23 +166,23 @@ try {
                                 Bank Transfer
                             </h4>
                             <div class="mht-package-detail-payment-items">
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/SeaBank_Indonesia_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="SeaBank">
+                                    <img src="/uploads/seabank-logo.png" 
                                          alt="SeaBank" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>SeaBank</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/5/5c/SeaBank_Indonesia_logo.svg';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Bank_Jago_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="Bank Jago">
+                                    <img src="/uploads/jago-logo.png" 
                                          alt="Bank Jago" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>Bank Jago</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/Bank_Jago_logo.svg';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="BCA">
+                                    <img src="/uploads/bca-logo.png" 
                                          alt="BCA" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>Bank BCA</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia_logo.svg';">
                                 </div>
                             </div>
                         </div>
@@ -194,29 +194,29 @@ try {
                                 E-Wallet
                             </h4>
                             <div class="mht-package-detail-payment-items">
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/OVO_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="OVO">
+                                    <img src="/uploads/ovo-logo.png" 
                                          alt="OVO" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>OVO</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/c/c4/OVO_logo.svg';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/DANA_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="DANA">
+                                    <img src="/uploads/dana-logo.png" 
                                          alt="DANA" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>DANA</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/7/72/DANA_logo.svg';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Logo_Gopay.svg" 
+                                <div class="mht-package-detail-payment-item" title="GoPay">
+                                    <img src="/uploads/gopay-logo.png" 
                                          alt="GoPay" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>GoPay</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/0/00/Logo_Gopay.svg';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/ShopeePay_logo.svg" 
+                                <div class="mht-package-detail-payment-item" title="ShopeePay">
+                                    <img src="/uploads/shopeepay-logo.png" 
                                          alt="ShopeePay" 
-                                         class="mht-package-detail-payment-logo">
-                                    <span>ShopeePay</span>
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/5/51/ShopeePay_logo.svg';">
                                 </div>
                             </div>
                         </div>
@@ -228,13 +228,15 @@ try {
                                 Pembayaran Lainnya
                             </h4>
                             <div class="mht-package-detail-payment-items">
-                                <div class="mht-package-detail-payment-item">
-                                    <i class="fas fa-qrcode"></i>
-                                    <span>QRIS</span>
+                                <div class="mht-package-detail-payment-item" title="QRIS">
+                                    <img src="/uploads/qris-logo.png" 
+                                         alt="QRIS" 
+                                         class="mht-package-detail-payment-logo"
+                                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/QRIS_logo.svg/1200px-QRIS_logo.svg.png';">
                                 </div>
-                                <div class="mht-package-detail-payment-item">
-                                    <i class="fas fa-money-bill"></i>
-                                    <span>Cash (Offline)</span>
+                                <div class="mht-package-detail-payment-item" title="Cash (Offline)">
+                                    <!-- Cash tetap pakai icon -->
+                                    <i class="fas fa-money-bill-wave"></i>
                                 </div>
                             </div>
                         </div>
@@ -270,6 +272,39 @@ try {
     </div>
 </section>
 
+<!-- IMAGE MODAL - Enhanced Version -->
+<div id="mht-image-modal" class="mht-image-modal">
+    <div class="mht-modal-overlay"></div>
+    <div class="mht-modal-container">
+        <button class="mht-modal-close" id="mht-modal-close">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <button class="mht-modal-nav mht-modal-prev" id="mht-modal-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <button class="mht-modal-nav mht-modal-next" id="mht-modal-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="mht-modal-content">
+            <img src="" alt="Full Screen Screenshot" id="mht-modal-image">
+            
+            <div class="mht-modal-caption" id="mht-modal-caption">
+                <div class="mht-modal-title"></div>
+                <div class="mht-modal-counter"></div>
+            </div>
+            
+            <div class="mht-modal-loader" id="mht-modal-loader">
+                <div class="mht-loader-spinner"></div>
+            </div>
+        </div>
+        
+        <div class="mht-modal-thumbnails" id="mht-modal-thumbnails"></div>
+    </div>
+</div>
+
 <style>
 /* ===== MHT PACKAGE DETAIL STYLES - WITH CUSTOM SCROLLBAR ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -289,7 +324,8 @@ try {
     --mht-package-shadow-hover: 0 15px 35px rgba(156, 39, 176, 0.15);
     --mht-package-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mht-package-radius: 20px;
-    --bg-light: #F9F9F9; /* Untuk konsistensi dengan halaman lain */
+    --bg-light: #F9F9F9;
+    --mht-modal-overlay: rgba(0, 0, 0, 0.95);
 }
 
 /* Reset total */
@@ -309,7 +345,12 @@ html, body {
     scroll-behavior: smooth;
 }
 
-/* ===== CUSTOM SCROLLBAR - SAMA PERSIS DENGAN HALAMAN LAIN ===== */
+/* Prevent body scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -576,6 +617,12 @@ html, body {
     overflow: hidden;
     aspect-ratio: 16/9;
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mht-package-detail-gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(156, 39, 176, 0.2);
 }
 
 .mht-package-detail-gallery-item img {
@@ -678,7 +725,7 @@ html, body {
     animation: mhtPackageDetailSlideIn 0.5s ease 0.2s forwards;
 }
 
-/* Payment Methods */
+/* Payment Methods - Enhanced dengan Logo (Tanpa Teks) */
 .mht-package-detail-payment {
     background: var(--mht-package-bg-white);
     border-radius: var(--mht-package-radius);
@@ -733,25 +780,41 @@ html, body {
 .mht-package-detail-payment-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px;
+    justify-content: center;
+    padding: 12px;
     background: var(--mht-package-bg-light);
-    border-radius: 10px;
-    font-size: 0.85rem;
-    color: var(--mht-package-text-body);
+    border-radius: 12px;
     border: 1px solid var(--mht-package-border);
     transition: var(--mht-package-transition);
+    min-height: 60px;
+    cursor: default;
 }
 
 .mht-package-detail-payment-item:hover {
     background: var(--mht-package-primary-light);
     transform: translateY(-2px);
+    border-color: var(--mht-package-primary);
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.1);
 }
 
 .mht-package-detail-payment-logo {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
+    border-radius: 8px;
+    background: white;
+    padding: 4px;
+}
+
+.mht-package-detail-payment-item i {
+    font-size: 2rem;
+    color: var(--mht-package-primary);
+}
+
+/* Style khusus untuk icon cash */
+.mht-package-detail-payment-item .fa-money-bill-wave {
+    color: #2e7d32;
+    font-size: 2rem;
 }
 
 .mht-package-detail-payment-note {
@@ -778,11 +841,11 @@ html, body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px;
+    padding: 12px;
     background: #e8f5e9;
     color: #2e7d32;
     border-radius: 30px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
@@ -836,6 +899,249 @@ html, body {
     transform: translateY(-3px);
 }
 
+/* Tooltip untuk nama metode pembayaran */
+.mht-package-detail-payment-item {
+    position: relative;
+}
+
+.mht-package-detail-payment-item:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    margin-bottom: 5px;
+    z-index: 10;
+}
+
+/* ===== IMAGE MODAL STYLES - Enhanced ===== */
+.mht-image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mht-image-modal.active {
+    display: block;
+}
+
+.mht-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mht-modal-overlay);
+    backdrop-filter: blur(10px);
+    animation: mhtModalFadeIn 0.3s ease;
+}
+
+.mht-modal-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.mht-modal-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+.mht-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mht-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+.mht-modal-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mht-modal-prev {
+    left: 30px;
+}
+
+.mht-modal-prev:hover {
+    transform: translateY(-50%) translateX(-5px);
+}
+
+.mht-modal-next {
+    right: 30px;
+}
+
+.mht-modal-next:hover {
+    transform: translateY(-50%) translateX(5px);
+}
+
+.mht-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80vh;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#mht-modal-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.mht-image-modal.active #mht-modal-image {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mht-modal-caption {
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+}
+
+.mht-modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.mht-modal-counter {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.mht-modal-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.mht-modal-loader.active {
+    display: block;
+}
+
+.mht-loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--mht-package-primary);
+    animation: mhtModalSpin 1s ease-in-out infinite;
+}
+
+.mht-modal-thumbnails {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mht-package-primary) rgba(255, 255, 255, 0.1);
+}
+
+.mht-modal-thumbnails::-webkit-scrollbar {
+    height: 4px;
+}
+
+.mht-modal-thumbnails::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mht-modal-thumbnails::-webkit-scrollbar-thumb {
+    background: var(--mht-package-primary);
+    border-radius: 4px;
+}
+
+.mht-modal-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.mht-modal-thumb.active {
+    opacity: 1;
+    border-color: var(--mht-package-primary);
+    transform: scale(1.1);
+}
+
+.mht-modal-thumb:hover {
+    opacity: 1;
+}
+
+.mht-modal-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Animations */
 @keyframes mhtPackageDetailSlideIn {
     to {
@@ -844,10 +1150,39 @@ html, body {
     }
 }
 
+@keyframes mhtModalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mhtModalSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .mht-package-detail-wrapper {
         grid-template-columns: 1fr;
+    }
+    
+    .mht-modal-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .mht-modal-prev {
+        left: 15px;
+    }
+    
+    .mht-modal-next {
+        right: 15px;
     }
 }
 
@@ -886,7 +1221,37 @@ html, body {
     }
     
     .mht-package-detail-payment-items {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mht-package-detail-payment-logo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .mht-package-detail-payment-item i {
+        font-size: 1.8rem;
+    }
+    
+    .mht-modal-container {
+        padding: 20px;
+    }
+    
+    .mht-modal-close {
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .mht-modal-thumb {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .mht-modal-thumbnails {
+        padding: 15px;
     }
 }
 
@@ -909,6 +1274,26 @@ html, body {
     
     .mht-package-detail-gallery-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .mht-package-detail-payment-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .mht-package-detail-payment-logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mht-modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .mht-modal-thumb {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -960,7 +1345,197 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Run check after a short delay
     setTimeout(checkFontAwesome, 100);
+    
+    // Initialize Image Modal
+    initImageModal();
 });
+
+// Image Modal Functionality
+function initImageModal() {
+    const modal = document.getElementById('mht-image-modal');
+    const modalImage = document.getElementById('mht-modal-image');
+    const modalTitle = document.querySelector('.mht-modal-title');
+    const modalCounter = document.querySelector('.mht-modal-counter');
+    const closeBtn = document.getElementById('mht-modal-close');
+    const prevBtn = document.getElementById('mht-modal-prev');
+    const nextBtn = document.getElementById('mht-modal-next');
+    const loader = document.getElementById('mht-modal-loader');
+    const thumbnailsContainer = document.getElementById('mht-modal-thumbnails');
+    
+    const galleryItems = document.querySelectorAll('.mht-package-detail-gallery-item');
+    let currentIndex = 0;
+    let images = [];
+    
+    // Collect all images from gallery
+    galleryItems.forEach((item, index) => {
+        const img = item.querySelector('img');
+        if (img) {
+            images.push({
+                src: img.src,
+                alt: img.alt,
+                index: index
+            });
+        }
+        
+        // Add click event to gallery items
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentIndex = parseInt(this.dataset.index) || index;
+            openModal(currentIndex);
+        });
+    });
+    
+    // Open modal
+    function openModal(index) {
+        currentIndex = index;
+        updateModalImage();
+        updateThumbnails();
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // Add keyboard event listeners
+        document.addEventListener('keydown', handleKeyDown);
+    }
+    
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        document.removeEventListener('keydown', handleKeyDown);
+    }
+    
+    // Update modal image
+    function updateModalImage() {
+        if (images.length === 0) return;
+        
+        const image = images[currentIndex];
+        
+        // Show loader
+        loader.classList.add('active');
+        
+        // Preload image
+        const img = new Image();
+        img.onload = function() {
+            modalImage.src = image.src;
+            modalImage.alt = image.alt;
+            modalTitle.textContent = image.alt || 'Screenshot';
+            modalCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+            loader.classList.remove('active');
+            
+            // Update active thumbnail
+            document.querySelectorAll('.mht-modal-thumb').forEach((thumb, i) => {
+                if (i === currentIndex) {
+                    thumb.classList.add('active');
+                    // Scroll thumbnail into view
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        };
+        img.src = image.src;
+    }
+    
+    // Update thumbnails
+    function updateThumbnails() {
+        let html = '';
+        images.forEach((image, index) => {
+            html += `
+                <div class="mht-modal-thumb ${index === currentIndex ? 'active' : ''}" data-thumb-index="${index}">
+                    <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                </div>
+            `;
+        });
+        
+        thumbnailsContainer.innerHTML = html;
+        
+        // Add click events to thumbnails
+        document.querySelectorAll('.mht-modal-thumb').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const index = parseInt(this.dataset.thumbIndex);
+                if (!isNaN(index)) {
+                    currentIndex = index;
+                    updateModalImage();
+                }
+            });
+        });
+    }
+    
+    // Navigate to previous image
+    function prevImage() {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateModalImage();
+    }
+    
+    // Navigate to next image
+    function nextImage() {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex + 1) % images.length;
+        updateModalImage();
+    }
+    
+    // Handle keyboard events
+    function handleKeyDown(e) {
+        switch(e.key) {
+            case 'Escape':
+                closeModal();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    }
+    
+    // Event listeners
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (prevBtn) prevBtn.addEventListener('click', prevImage);
+    if (nextBtn) nextBtn.addEventListener('click', nextImage);
+    
+    // Close modal when clicking overlay
+    if (modal) {
+        modal.querySelector('.mht-modal-overlay').addEventListener('click', closeModal);
+    }
+    
+    // Prevent click on modal container from closing
+    const modalContainer = document.querySelector('.mht-modal-container');
+    if (modalContainer) {
+        modalContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+    
+    // Touch events for mobile swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modalContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    modalContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchEndX - touchStartX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe right
+                prevImage();
+            } else {
+                // Swipe left
+                nextImage();
+            }
+        }
+    }
+}
 </script>
 
 <!-- Fallback untuk browser tanpa JavaScript -->

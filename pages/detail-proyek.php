@@ -6,7 +6,7 @@ require_once __DIR__ . '/../webmaster/includes/db.php';
 
 if (!isset($_GET['slug']) || empty($_GET['slug'])) {
     // Redirect ke halaman proyek jika slug tidak valid
-    header('Location: proyek-kami.php');
+    header('Location: proyek-kami');
     exit;
 }
 
@@ -19,7 +19,7 @@ try {
 
     if (!$project) {
         // Redirect ke halaman proyek jika proyek tidak ditemukan
-        header('Location: proyek-kami.php');
+        header('Location: proyek-kami');
         exit;
     }
 } catch (PDOException $e) {
@@ -45,7 +45,7 @@ $projectUrl = !empty($project['url']) ? htmlspecialchars($project['url']) : '';
     
     <div class="mht-project-detail-container">
         <!-- Back Button -->
-        <a href="proyek-kami.php" class="mht-project-detail-back">
+        <a href="proyek-kami" class="mht-project-detail-back">
             <i class="fas fa-arrow-left"></i>
             <span>Kembali ke Semua Proyek</span>
         </a>
