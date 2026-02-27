@@ -797,7 +797,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>PT Micro Helix Tech Solutions - Solusi Teknologi Terpercaya</p>
         <div class="mht-contact-badge">
             <i class="fas fa-phone-alt"></i>
-            <span>+62 21 5082 8888 | +62 851-8324-1229</span>
+            <span>+62 851-8324-1229</span>
         </div>
     </div>
 
@@ -830,13 +830,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <h3>Kontak Langsung</h3>
-                <div class="mht-info-highlight" id="mht-phone">
-                    <i class="fas fa-phone"></i>
-                    +62 21 5082 8888
-                </div>
                 <div class="mht-info-highlight" id="mht-email">
                     <i class="fas fa-envelope"></i>
-                    info@microhelix.co.id
+                    contact@microhelixtechsolutions.co.id
                 </div>
                 <div class="mht-info-highlight" id="mht-wa">
                     <i class="fab fa-whatsapp"></i>
@@ -846,11 +842,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="https://wa.me/6285183241229" class="mht-social-link" target="_blank" id="mht-wa-link">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="mailto:info@microhelix.co.id" class="mht-social-link" id="mht-email-link">
+                    <a href="mailto:contact@microhelixtechsolutions.co.id" class="mht-social-link" id="mht-email-link">
                         <i class="far fa-envelope"></i>
-                    </a>
-                    <a href="tel:+622150828888" class="mht-social-link" id="mht-phone-link">
-                        <i class="fas fa-phone"></i>
                     </a>
                     <a href="#" class="mht-social-link" target="_blank" id="mht-linkedin-link">
                         <i class="fab fa-linkedin-in"></i>

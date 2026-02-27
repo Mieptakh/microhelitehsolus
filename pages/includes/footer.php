@@ -97,8 +97,8 @@
 
       <script>
         // Email protection
-        const user = "contactmhteams";
-        const domain = "gmail.com";
+        const user = "contact";
+        const domain = "microhelixtechsolutions.co.id";
         const email = `${user}@${domain}`;
         const link = document.getElementById("email-link");
         link.href = `mailto:${email}`;
