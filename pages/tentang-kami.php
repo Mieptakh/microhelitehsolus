@@ -915,9 +915,9 @@ html {
                     <div class="mht-about-team-role">Founder, Direktur & Full Stack Programmer</div>
                     <p class="mht-about-team-bio">Siswa kelas 12 yang memiliki passion di dunia programming sejak SMP. Menguasai berbagai bahasa pemrograman dan framework untuk pengembangan website.</p>
                     <div class="mht-about-team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/ach-miftakhul-huda/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/m.hdais1"><i class="fab fa-instagram"></i></a>
+                        <a href="http://github.com/mieptakh"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 
@@ -929,9 +929,9 @@ html {
                     <div class="mht-about-team-role">Graphic Designer</div>
                     <p class="mht-about-team-bio">Siswa kelas 12 dengan bakat luar biasa di bidang desain grafis. Bertanggung jawab atas tampilan visual website yang menarik dan user-friendly.</p>
                     <div class="mht-about-team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <!-- <a href=""><i class="fab fa-linkedin-in"></i></a> -->
+                        <a href="https://www.instagram.com/muhammad.ihsanns?igsh=dHQ3Mzlzc3V3bjNt"><i class="fab fa-instagram"></i></a>
+                        <!-- <a href="#"><i class="fab fa-behance"></i></a> -->
                     </div>
                 </div>
                 
@@ -943,9 +943,9 @@ html {
                     <div class="mht-about-team-role">Administrasi & Quality Assurance</div>
                     <p class="mht-about-team-bio">Siswa kelas 12 yang bertanggung jawab atas administrasi, komunikasi dengan klien, dan quality control untuk memastikan setiap website bebas bug.</p>
                     <div class="mht-about-team-social">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <!-- <a href="#"><i class="fab fa-linkedin-in"></i></a> -->
+                        <a href="https://www.instagram.com/iimmrrsyydd?igsh=MXYzbm51M2hhbXppMw=="><i class="fab fa-instagram"></i></a>
+                        <!-- <a href="#"><i class="fab fa-whatsapp"></i></a> -->
                     </div>
                 </div>
             </div>

@@ -810,15 +810,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="mht-info-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
+
                 <h3>Kantor Pusat</h3>
-                <p>Menara BTPN, Lantai 28</p>
-                <p>Jl. Dr. Ide Anak Agung Gde Agung Kav. 5.5-5.6</p>
-                <p>Kuningan Timur, Setiabudi, Jakarta Selatan 12950</p>
+                <p>PT MicroHelix Tech Solutions</p>
+                <p>Lokasi di peta — klik ikon di bawah untuk buka detail</p>
+
                 <div class="mht-info-social">
-                    <a href="#" class="mht-social-link" target="_blank" id="mht-location-link">
+                    <a href="https://www.google.com/maps/place/PT+MicroHelix+Tech+Solutions/@-7.4912254,112.7194841,771m"
+                    class="mht-social-link"
+                    target="_blank"
+                    title="Lihat lokasi di Google Maps">
                         <i class="fas fa-location-dot"></i>
                     </a>
-                    <a href="#" class="mht-social-link" target="_blank" id="mht-directions-link">
+
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=-7.4912254,112.7194841"
+                    class="mht-social-link"
+                    target="_blank"
+                    title="Dapatkan arah ke sini">
                         <i class="fas fa-directions"></i>
                     </a>
                 </div>
@@ -845,7 +853,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="mailto:contact@microhelixtechsolutions.co.id" class="mht-social-link" id="mht-email-link">
                         <i class="far fa-envelope"></i>
                     </a>
-                    <a href="#" class="mht-social-link" target="_blank" id="mht-linkedin-link">
+                    <a href="https://www.linkedin.com/company/microhelixtechsolutions" class="mht-social-link" target="_blank" id="mht-linkedin-link">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>

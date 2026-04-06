@@ -8,7 +8,7 @@
       <p>PT MicroHelix Tech Solutions - Solusi digital terpercaya untuk kebutuhan website dan teknologi Anda.</p>
       <div class="footer-socials">
         <a href="https://instagram.com/microhelitechsolus" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://linkedin.com/company/mhteams" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.linkedin.com/company/microhelixtechsolutions" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
 
